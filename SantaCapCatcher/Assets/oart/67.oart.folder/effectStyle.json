@@ -1,0 +1,236 @@
+{
+  "fill": {
+    "alpha": 1,
+    "content": {
+      "gradient": {
+        "alpha": [
+          1,
+          1
+        ],
+        "angle": 90,
+        "color": [
+          [
+            1,
+            1,
+            1
+          ],
+          [
+            1,
+            1,
+            1
+          ]
+        ],
+        "mode": "all",
+        "percent": [
+          0,
+          1
+        ]
+      },
+      "render_type": "solid",
+      "solid": {
+        "alpha": 1,
+        "color": [
+          1,
+          1,
+          1
+        ]
+      },
+      "texture": {
+        "alpha": 1,
+        "angle": 0,
+        "blend": "no",
+        "flip": [
+          false,
+          false
+        ],
+        "path": "defaultWhite.png",
+        "range": -1,
+        "scale": 1,
+        "offset": [
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "inner_shadows": [],
+  "shadows": [
+    {
+      "alpha": 1,
+      "enable": true,
+      "content": {
+        "render_type": "gradient",
+        "solid": {
+          "color": [
+            0,
+            0,
+            0
+          ],
+          "alpha": 1
+        },
+        "gradient": {
+          "mode": "character",
+          "angle": 90,
+          "color": [
+            [
+              0.9843137264251709,
+              0.6313725709915161,
+              0.10588235408067703
+            ],
+            [
+              0.9416666626930237,
+              0.1098611131310463,
+              0.1098611131310463
+            ]
+          ],
+          "alpha": [
+            1,
+            1
+          ],
+          "percent": [
+            0,
+            1
+          ]
+        },
+        "texture": {
+          "alpha": 1,
+          "angle": 0,
+          "blend": "no",
+          "flip": [
+            false,
+            false
+          ],
+          "path": "defaultWhite.png",
+          "range": -1,
+          "scale": 2.799999952316284,
+          "offset": [
+            -0.44999998807907104,
+            -0.30000001192092896
+          ]
+        }
+      },
+      "distance": 10,
+      "angle": -65,
+      "feather": 0,
+      "diffuse": -1,
+      "strokes": [
+        {
+          "alpha": 1,
+          "enable": false,
+          "content": {
+            "render_type": "solid",
+            "solid": {
+              "color": [
+                0,
+                0,
+                0
+              ],
+              "alpha": 1
+            },
+            "gradient": {
+              "mode": "all",
+              "angle": 90,
+              "color": [
+                [
+                  1,
+                  1,
+                  1
+                ],
+                [
+                  1,
+                  1,
+                  1
+                ]
+              ],
+              "alpha": [
+                1,
+                1
+              ],
+              "percent": [
+                0,
+                1
+              ]
+            },
+            "texture": {
+              "alpha": 1,
+              "angle": 0,
+              "blend": "no",
+              "flip": [
+                false,
+                false
+              ],
+              "path": "defaultBlack.png",
+              "range": -1,
+              "scale": 1,
+              "offset": [
+                0,
+                0
+              ]
+            }
+          },
+          "width": 0.05400000140070915
+        }
+      ]
+    }
+  ],
+  "strokes": [
+    {
+      "alpha": 1,
+      "enable": true,
+      "content": {
+        "render_type": "gradient",
+        "solid": {
+          "color": [
+            1,
+            1,
+            1
+          ],
+          "alpha": 1
+        },
+        "gradient": {
+          "mode": "character",
+          "angle": 90,
+          "color": [
+            [
+              0.9843137264251709,
+              0.6313725709915161,
+              0.10588235408067703
+            ],
+            [
+              0.9411764740943909,
+              0.10980392247438431,
+              0.10980392247438431
+            ]
+          ],
+          "alpha": [
+            1,
+            1
+          ],
+          "percent": [
+            0,
+            1
+          ]
+        },
+        "texture": {
+          "alpha": 1,
+          "angle": 0,
+          "blend": "no",
+          "flip": [
+            false,
+            false
+          ],
+          "path": "defaultWhite.png",
+          "range": -1,
+          "scale": 2.799999952316284,
+          "offset": [
+            -0.44999998807907104,
+            -0.30000001192092896
+          ]
+        }
+      },
+      "width": 0.027000000700354576
+    }
+  ],
+  "textable": false,
+  "version": 101
+}

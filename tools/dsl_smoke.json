@@ -1,0 +1,8 @@
+{
+  "intention": "Smoke test that an imported transparent PNG renders on a Screen Image before building the full UI.",
+  "commands": [
+    { "commandType": "add_builtin_object", "params": { "object_type": "Screen Image", "name": "SmokeTest" }, "alias": "smoke" },
+    { "commandType": "set_component", "params": { "guid": { "$ref": "smoke", "componentType": "ScreenTransform" }, "properties": { "anchoredPosition": { "x": 0, "y": 0 }, "sizeDelta": { "x": 300, "y": 300 } } } },
+    { "commandType": "set_component", "params": { "guid": { "$ref": "smoke", "componentType": "Image" }, "properties": { "texture": { "guid": "r2" }, "stretchMode": "Fit", "color": { "r": 1, "g": 1, "b": 1, "a": 1 } } } }
+  ]
+}

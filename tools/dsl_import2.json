@@ -1,0 +1,17 @@
+{
+  "intention": "Import the failure SFX and label the generated textures so later steps keep their meaning.",
+  "commands": [
+    { "commandType": "import_source", "params": { "file_path": "sounds/sfx_fail.mp3" }, "alias": "sfx_fail" },
+    { "commandType": "annotate", "params": { "guid": "r2", "description": "Red cartoon santa hat with white fur band and pompom, transparent background, normal +1 item" } },
+    { "commandType": "annotate", "params": { "guid": "r3", "description": "Golden santa hat with cream fur and sparkles, transparent background, bonus +3 item" } },
+    { "commandType": "annotate", "params": { "guid": "r4", "description": "Green angry monster with a lit black bomb, transparent background, bad -2 item" } },
+    { "commandType": "annotate", "params": { "guid": "r5", "description": "Golden glowing ring with sparkles, transparent background, forehead catcher indicator" } },
+    { "commandType": "annotate", "params": { "guid": "r6", "description": "Soft white six point snowflake, transparent background, snow particle" } },
+    { "commandType": "annotate", "params": { "guid": "r7", "description": "Golden radial star burst with sparkles, transparent background, catch impact VFX" } },
+    { "commandType": "annotate", "params": { "guid": "r8", "description": "Dark red rounded pill plate with gold border, HUD backing plate" } },
+    { "commandType": "annotate", "params": { "guid": "r9", "description": "Translucent dark red rounded card with gold border and snowflakes, result panel" } },
+    { "commandType": "annotate", "params": { "guid": "r10", "description": "Bright red rounded button plate with gold rim, retry button" } },
+    { "commandType": "annotate", "params": { "guid": "r11", "description": "Golden five point star with dark outline, miss life icon" } },
+    { "commandType": "annotate", "params": { "guid": "r12", "description": "Plain white texture used for tinted solid color UI fills" } }
+  ]
+}

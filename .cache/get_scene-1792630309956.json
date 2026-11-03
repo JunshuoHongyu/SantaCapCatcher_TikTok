@@ -1,0 +1,8 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"renderGroups\": [\n    {\n      \"guid\": \"r1\",\n      \"name\": \"General\",\n      \"type\": \"Utility\",\n      \"sceneObjects\": [\n        {\n          \"guid\": \"s1\",\n          \"name\": \"Camera\",\n          \"enabled\": true,\n          \"visible\": true,\n          \"renderOrder\": 0,\n          \"components\": [\n            {\n              \"guid\": \"c1\",\n              \"type\": \"Transform\",\n              \"localPosition\": { \"x\": 0, \"y\": 0, \"z\": 40, \"w\": null }\n            },\n            {\n              \"guid\": \"c2\",\n              \"type\": \"Camera\",\n              \"cameraType\": \"PERSPECTIVE\",\n              \"fov\": 60,\n              \"orthoHeight\": 1,\n              \"_cameraInfo\": {\n                \"forwardDirection\": { \"x\": 0, \"y\": 0, \"z\": -1 },\n                \"lookAtPoint\": { \"x\": 0, \"y\": 0, \"z\": 0 }\n              }\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"_notes\": {\n    \"_cameraInfo\": \"READ-ONLY. Auto-computed from Transform euler angles. To change camera direction, set the Transform localEulerAngles property (X=pitch: +UP/-DOWN, Y=yaw: +LEFT/-RIGHT). Do NOT try to set these fields directly.\"\n  }\n}"
+    }
+  ]
+}

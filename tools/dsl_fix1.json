@@ -1,0 +1,12 @@
+{
+  "intention": "Soften the calibration dimmer so the live camera feed stays clearly visible behind the calibration prompt.",
+  "commands": [
+    {
+      "commandType": "set_component",
+      "params": {
+        "guid": { "$ref": "s13", "componentType": "Image" },
+        "properties": { "color": { "r": 0.02, "g": 0.02, "b": 0.06, "a": 0.34 } }
+      }
+    }
+  ]
+}

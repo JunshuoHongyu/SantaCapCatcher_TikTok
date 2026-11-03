@@ -1,0 +1,26 @@
+[
+  {
+    "name": "CapGold",
+    "texts": [
+      "{\n  \"error\": \"generate_image failed: POST request failed forhttps://effecthouse.tiktok.com/api/tool/v2/aigc/styles/generate\"\n}"
+    ]
+  },
+  {
+    "name": "CapRed",
+    "texts": [
+      "{\n  \"error\": \"generate_image failed: POST request failed forhttps://effecthouse.tiktok.com/api/tool/v2/aigc/styles/generate\"\n}"
+    ]
+  },
+  {
+    "name": "ForeheadRing",
+    "texts": [
+      "{\n  \"error\": \"generate_image failed: POST request failed forhttps://effecthouse.tiktok.com/api/tool/v2/aigc/styles/generate\"\n}"
+    ]
+  },
+  {
+    "name": "BadBomb",
+    "texts": [
+      "{\n  \"error\": \"generate_image failed: POST request failed forhttps://effecthouse.tiktok.com/api/tool/v2/aigc/styles/generate\"\n}"
+    ]
+  }
+]

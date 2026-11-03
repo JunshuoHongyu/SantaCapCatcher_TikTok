@@ -1,0 +1,8 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"executed\":1,\"results\":[{\"command\":\"import_source\",\"status\":\"error\",\"error\":\"Import failed — the engine rejected \\\"Boom48.wav\\\" without a specific reason. The file may be malformed or an unsupported variant; if it came from another tool, try re-exporting it as .fbx or .glb.\",\"hint\":\"Check the file path. For bundled library assets, call query_knowledge(category='game_asset') first.\"}],\"failed\":1,\"status\":\"error\",\"error\":\"1 of 1 command(s) failed — see results[] for per-command details\"}"
+    }
+  ]
+}

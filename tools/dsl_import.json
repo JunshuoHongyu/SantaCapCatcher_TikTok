@@ -1,0 +1,24 @@
+{
+  "intention": "Import all generated sprites, curated art text and audio into the project so scene objects can reference real resources.",
+  "commands": [
+    { "commandType": "import_source", "params": { "file_path": "E:/HatGame/art/CapRed.png" }, "alias": "t_cap_red" },
+    { "commandType": "import_source", "params": { "file_path": "E:/HatGame/art/CapGold.png" }, "alias": "t_cap_gold" },
+    { "commandType": "import_source", "params": { "file_path": "E:/HatGame/art/BadBomb.png" }, "alias": "t_bad_bomb" },
+    { "commandType": "import_source", "params": { "file_path": "E:/HatGame/art/ForeheadRing.png" }, "alias": "t_ring" },
+    { "commandType": "import_source", "params": { "file_path": "E:/HatGame/art/Snowflake.png" }, "alias": "t_snow" },
+    { "commandType": "import_source", "params": { "file_path": "E:/HatGame/art/StarBurst.png" }, "alias": "t_burst" },
+    { "commandType": "import_source", "params": { "file_path": "E:/HatGame/art/HudPlate.png" }, "alias": "t_hud" },
+    { "commandType": "import_source", "params": { "file_path": "E:/HatGame/art/ResultCard.png" }, "alias": "t_card" },
+    { "commandType": "import_source", "params": { "file_path": "E:/HatGame/art/RetryButton.png" }, "alias": "t_button" },
+    { "commandType": "import_source", "params": { "file_path": "E:/HatGame/art/MissStar.png" }, "alias": "t_star" },
+    { "commandType": "import_source", "params": { "file_path": "E:/HatGame/art/White.png" }, "alias": "t_white" },
+    { "commandType": "import_source", "params": { "file_path": "art_text/67.oart" }, "alias": "art_number" },
+    { "commandType": "import_source", "params": { "file_path": "art_text/vi_arcade.oart" }, "alias": "art_arcade" },
+    { "commandType": "import_source", "params": { "file_path": "sounds/bgm_loop.mp3" }, "alias": "sfx_bgm" },
+    { "commandType": "import_source", "params": { "file_path": "sounds/sfx_click.mp3" }, "alias": "sfx_click" },
+    { "commandType": "import_source", "params": { "file_path": "sounds/sfx_pop.mp3" }, "alias": "sfx_pop" },
+    { "commandType": "import_source", "params": { "file_path": "sounds/sfx_success.mp3" }, "alias": "sfx_success" },
+    { "commandType": "import_source", "params": { "file_path": "E:/HatGame/art/Boom.wav" }, "alias": "sfx_boom" },
+    { "commandType": "import_source", "params": { "file_path": "E:/HatGame/art/Jackpot.wav" }, "alias": "sfx_jackpot" }
+  ]
+}

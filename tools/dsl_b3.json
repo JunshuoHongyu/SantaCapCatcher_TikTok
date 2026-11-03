@@ -1,0 +1,533 @@
+{
+ "intention": "Build the Santa Cap Catcher game scene (b3)",
+ "commands": [
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Screen Image",
+    "name": "ResCard",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "ResCard"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "ResCard",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": 40
+     },
+     "sizeDelta": {
+      "x": 620,
+      "y": 900
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "ResCard",
+     "componentType": "Image"
+    },
+    "properties": {
+     "texture": {
+      "guid": "r9"
+     },
+     "stretchMode": "Fit",
+     "opacity": 1
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "2D Text",
+    "name": "ResTitle",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "ResTitle"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "ResTitle",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": 370
+     },
+     "sizeDelta": {
+      "x": 560,
+      "y": 80
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "ResTitle",
+     "componentType": "Text"
+    },
+    "properties": {
+     "text": "圣诞帽大作战",
+     "fontSize": 46,
+     "color": {
+      "r": 1,
+      "g": 0.82,
+      "b": 0.25,
+      "a": 1
+     },
+     "horizontalAlignment": "CENTER",
+     "verticalAlignment": "CENTER"
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "2D Text",
+    "name": "ResScore",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "ResScore"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "ResScore",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": 262
+     },
+     "sizeDelta": {
+      "x": 560,
+      "y": 90
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "ResScore",
+     "componentType": "Text"
+    },
+    "properties": {
+     "text": "本局得分 0",
+     "fontSize": 58,
+     "color": {
+      "r": 1,
+      "g": 1,
+      "b": 1,
+      "a": 1
+     },
+     "horizontalAlignment": "CENTER",
+     "verticalAlignment": "CENTER"
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "2D Text",
+    "name": "ResRank",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "ResRank"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "ResRank",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": 150
+     },
+     "sizeDelta": {
+      "x": 560,
+      "y": 100
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "ResRank",
+     "componentType": "Text"
+    },
+    "properties": {
+     "text": "灵活的圣诞小精灵",
+     "fontSize": 58,
+     "color": {
+      "r": 1,
+      "g": 0.93,
+      "b": 0.55,
+      "a": 1
+     },
+     "horizontalAlignment": "CENTER",
+     "verticalAlignment": "CENTER"
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "2D Text",
+    "name": "ResShare1",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "ResShare1"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "ResShare1",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": -30
+     },
+     "sizeDelta": {
+      "x": 560,
+      "y": 60
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "ResShare1",
+     "componentType": "Text"
+    },
+    "properties": {
+     "text": "@你最手残的朋友来挑战！",
+     "fontSize": 34,
+     "color": {
+      "r": 1,
+      "g": 1,
+      "b": 1,
+      "a": 1
+     },
+     "horizontalAlignment": "CENTER",
+     "verticalAlignment": "CENTER"
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "2D Text",
+    "name": "ResShare2",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "ResShare2"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "ResShare2",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": -105
+     },
+     "sizeDelta": {
+      "x": 560,
+      "y": 60
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "ResShare2",
+     "componentType": "Text"
+    },
+    "properties": {
+     "text": "点击下方按钮，使用同款特效合拍！",
+     "fontSize": 28,
+     "color": {
+      "r": 1,
+      "g": 0.88,
+      "b": 0.6,
+      "a": 1
+     },
+     "horizontalAlignment": "CENTER",
+     "verticalAlignment": "CENTER"
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Screen Image",
+    "name": "ResBtn",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "ResBtn"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "ResBtn",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": -270
+     },
+     "sizeDelta": {
+      "x": 400,
+      "y": 130
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "ResBtn",
+     "componentType": "Image"
+    },
+    "properties": {
+     "texture": {
+      "guid": "r10"
+     },
+     "stretchMode": "Fit",
+     "opacity": 1
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "2D Text",
+    "name": "ResBtnText",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "ResBtnText"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "ResBtnText",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": -270
+     },
+     "sizeDelta": {
+      "x": 400,
+      "y": 130
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "ResBtnText",
+     "componentType": "Text"
+    },
+    "properties": {
+     "text": "再玩一次",
+     "fontSize": 46,
+     "color": {
+      "r": 1,
+      "g": 1,
+      "b": 1,
+      "a": 1
+     },
+     "horizontalAlignment": "CENTER",
+     "verticalAlignment": "CENTER"
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Audio Player",
+    "name": "BgmPlayer"
+   },
+   "alias": "BgmPlayer"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "BgmPlayer",
+     "componentType": "AudioComponent"
+    },
+    "properties": {
+     "audioRef": {
+      "guid": "r15",
+      "type": "AudioAsset"
+     },
+     "playMode": "Infinity",
+     "volume": 45,
+     "autoPlay": true
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Audio Player",
+    "name": "SfxClick"
+   },
+   "alias": "SfxClick"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "SfxClick",
+     "componentType": "AudioComponent"
+    },
+    "properties": {
+     "audioRef": {
+      "guid": "r16",
+      "type": "AudioAsset"
+     },
+     "playMode": "Once",
+     "volume": 90,
+     "autoPlay": false
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Audio Player",
+    "name": "SfxPop"
+   },
+   "alias": "SfxPop"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "SfxPop",
+     "componentType": "AudioComponent"
+    },
+    "properties": {
+     "audioRef": {
+      "guid": "r17",
+      "type": "AudioAsset"
+     },
+     "playMode": "Once",
+     "volume": 90,
+     "autoPlay": false
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Audio Player",
+    "name": "SfxSuccess"
+   },
+   "alias": "SfxSuccess"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "SfxSuccess",
+     "componentType": "AudioComponent"
+    },
+    "properties": {
+     "audioRef": {
+      "guid": "r18",
+      "type": "AudioAsset"
+     },
+     "playMode": "Once",
+     "volume": 90,
+     "autoPlay": false
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Audio Player",
+    "name": "SfxFail"
+   },
+   "alias": "SfxFail"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "SfxFail",
+     "componentType": "AudioComponent"
+    },
+    "properties": {
+     "audioRef": {
+      "guid": "r19",
+      "type": "AudioAsset"
+     },
+     "playMode": "Once",
+     "volume": 90,
+     "autoPlay": false
+    }
+   }
+  }
+ ]
+}

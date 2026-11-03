@@ -1,0 +1,6 @@
+{
+  "intention": "Delete the stray unconfigured placeholder Screen Image that would otherwise cover the whole screen.",
+  "commands": [
+    { "commandType": "delete_object", "params": { "guid": "s47" } }
+  ]
+}

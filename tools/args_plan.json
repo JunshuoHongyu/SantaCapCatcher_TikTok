@@ -1,0 +1,629 @@
+{
+  "intention": "Persist the full Game Design Doc for Santa Cap Catcher before any scene construction, so the construction gate accepts edit_by_dsl.",
+  "type": "game",
+  "scene_representation": {
+    "planning_mode": "explicit",
+    "decision_summary": "Live camera feed stays full-screen as the backdrop (composition none). Gameplay is a screen-space 2D layer at 720x1280 with falling hat items and edge HUD. A Head Tracker rig supplies a forehead anchor whose world position is projected to screen pixels each frame, so the catcher collider follows the user's real forehead without moving the camera feed.",
+    "space": {
+      "kind": "screen",
+      "description": "720x1280 screen space for all gameplay items and HUD, layered directly over the camera feed."
+    },
+    "content_form": {
+      "kind": "flat_2d",
+      "description": "Flat 2D sprites, art text and a soft radial forehead ring, plus 3D camera and head tracker rig underneath."
+    },
+    "requirements": [
+      {
+        "id": "capture.head_follows_forehead",
+        "description": "The catcher hit point tracks the user's real forehead position every frame and mirrors head movement horizontally and vertically.",
+        "must": true
+      },
+      {
+        "id": "capture.feed_always_visible",
+        "description": "The live camera feed stays visible and unobstructed in the center of the screen during calibration, gameplay and result.",
+        "must": true
+      },
+      {
+        "id": "feedback.immediate_hit_readout",
+        "description": "Every caught or missed item produces immediate visible feedback (pop burst, score number, red flash and shake) and a matching sound.",
+        "must": true
+      },
+      {
+        "id": "hud.safe_zone_layout",
+        "description": "All HUD text and the retry button stay inside the TikTok safe zone so nothing is clipped by the TikTok UI.",
+        "must": false
+      }
+    ],
+    "layers": [
+      {
+        "id": "layer.head_rig",
+        "role": "head tracking rig",
+        "description": "Main Camera plus Head Tracker; an Empty child at forehead height supplies the world-space anchor that is projected to screen pixels.",
+        "space": {
+          "kind": "world",
+          "description": "3D camera space driven by head tracking"
+        },
+        "content_form": {
+          "kind": "volumetric_3d",
+          "description": "Tracking anchor transform only, no visible mesh"
+        },
+        "requirement_refs": ["capture.head_follows_forehead"]
+      },
+      {
+        "id": "layer.gameplay_2d",
+        "role": "falling items and catcher ring",
+        "description": "2D Camera canvas holding the forehead ring, pooled falling hat items, gold gifts and bad bombs that spawn at the top and fall to the bottom.",
+        "space": {
+          "kind": "screen",
+          "description": "Screen-space 2D canvas"
+        },
+        "content_form": {
+          "kind": "flat_2d",
+          "description": "Flat sprite quads positioned by script"
+        },
+        "requirement_refs": ["capture.head_follows_forehead", "feedback.immediate_hit_readout"]
+      },
+      {
+        "id": "layer.hud",
+        "role": "HUD, screens and result card",
+        "description": "Score, miss icons, timer bar, countdown art text, calibration prompt and the translucent result card with retry button, all anchored to safe-zone edges.",
+        "space": {
+          "kind": "screen",
+          "description": "Screen-space 2D canvas"
+        },
+        "content_form": {
+          "kind": "flat_2d",
+          "description": "Flat art text, labels and translucent panels"
+        },
+        "requirement_refs": ["hud.safe_zone_layout", "feedback.immediate_hit_readout"]
+      },
+      {
+        "id": "layer.camera_feed",
+        "role": "live camera background",
+        "description": "Full-screen camera feed rendered behind every 2D layer, never covered by an opaque panel.",
+        "space": {
+          "kind": "screen",
+          "description": "Full-screen camera feed background"
+        },
+        "content_form": {
+          "kind": "flat_2d",
+          "description": "Live video texture"
+        },
+        "requirement_refs": ["capture.feed_always_visible"]
+      }
+    ],
+    "limitations": [
+      "Hit detection uses distance in projected screen pixels, not true 3D depth, so an item is caught when its 2D distance to the projected forehead point is small.",
+      "Without a detected face the forehead anchor falls back to screen center so the game stays playable in the editor preview."
+    ],
+    "verification": [
+      {
+        "id": "verify.head_tracking",
+        "description": "Move the preview head horizontally and vertically, then compare the ring position with the head tracker.",
+        "requirement_refs": ["capture.head_follows_forehead"],
+        "views_or_states": ["head centered", "head turned left", "head moved up"],
+        "success_criteria": "The ring follows the forehead in the same direction with no visible lag or drift."
+      },
+      {
+        "id": "verify.feed_visibility",
+        "description": "Screenshot calibration, gameplay and result screens and confirm the face region is unobstructed.",
+        "requirement_refs": ["capture.feed_always_visible"],
+        "views_or_states": ["calibration screen", "active gameplay", "result screen"],
+        "success_criteria": "The center of the frame shows the live camera feed at all times with no opaque full-screen panel."
+      },
+      {
+        "id": "verify.hit_feedback",
+        "description": "Trigger a normal catch, a gold catch and a bad catch and inspect the pop text, burst, red flash and shake.",
+        "requirement_refs": ["feedback.immediate_hit_readout"],
+        "views_or_states": ["normal catch", "gold catch", "bad catch", "miss"],
+        "success_criteria": "Score popup and burst appear within one frame of contact and a miss flashes red with a screen shake."
+      },
+      {
+        "id": "verify.safe_zone",
+        "description": "Inspect the layout bounds of every HUD element and the retry button against the safe zone.",
+        "requirement_refs": ["hud.safe_zone_layout"],
+        "views_or_states": ["gameplay HUD", "result card with retry button"],
+        "success_criteria": "All HUD items sit within x -340..260 and y -400..500."
+      }
+    ]
+  },
+  "game_type": {
+    "camera_feed": "visible",
+    "ar_tracking": "head",
+    "core_loop_seconds": 2,
+    "total_duration_seconds": 45
+  },
+  "starter_template": {
+    "mode": "none",
+    "rationale": "The closest strong buildable, chef_hat_catch, steers a pot by dragging and ends on a timer only. This design is head-tracked with a forehead collider, weighted item mix, consecutive-miss and cumulative-miss loss, and a speed ramp, so the scaffold's drag input would have to be ripped out. Built from scratch while borrowing its falling-item stream and HUD framing."
+  },
+  "screens": [
+    {
+      "name": "CalibrationScreen",
+      "role": "intro",
+      "initial_visible": true,
+      "layout": [
+        {
+          "id": "el.calib_title",
+          "element": "TitleText",
+          "position": "top-center-safe",
+          "content": "SANTA CAP CATCHER",
+          "kind": "hud",
+          "bounds": { "x": -170, "y": 430, "w": 360, "h": 70 }
+        },
+        {
+          "id": "el.calib_redline",
+          "element": "RedCalibrationLine",
+          "position": "center-horizontal line",
+          "size": "560x8",
+          "kind": "decoration",
+          "notes": "A thin red horizontal line marks the target head height for calibration."
+        },
+        {
+          "id": "el.calib_arrow",
+          "element": "CalibrationArrow",
+          "position": "center-upper",
+          "size": "120x120",
+          "kind": "decoration",
+          "notes": "Downward chevron pointing at the red line."
+        },
+        {
+          "id": "el.calib_guide",
+          "element": "CalibrationGuideText",
+          "position": "below-red-line",
+          "content": "ALIGN YOUR HEAD WITH THE RED LINE",
+          "kind": "hud"
+        },
+        {
+          "id": "el.calib_status",
+          "element": "CalibrationStatusText",
+          "position": "bottom-safe",
+          "content": "Hold still to start",
+          "kind": "hud",
+          "bounds": { "x": -170, "y": -400, "w": 360, "h": 80 }
+        }
+      ]
+    },
+    {
+      "name": "GameplayScreen",
+      "role": "gameplay",
+      "initial_visible": false,
+      "layout": [
+        {
+          "id": "el.score_display",
+          "element": "ScoreCounter",
+          "position": "top-left-safe",
+          "content": "SCORE 0",
+          "kind": "hud",
+          "bounds": { "x": -320, "y": 470, "w": 220, "h": 70 },
+          "notes": "Score counter in the top-left HUD, borrowed from chef_hat_catch framing."
+        },
+        {
+          "id": "el.miss_icons",
+          "element": "MissIconRow",
+          "position": "top-right-safe",
+          "size": "200x40",
+          "kind": "hud",
+          "bounds": { "x": 60, "y": 460, "w": 200, "h": 44 },
+          "notes": "Five miss icons showing remaining lives."
+        },
+        {
+          "id": "el.timer_bar",
+          "element": "TimerBar",
+          "position": "top-center-safe",
+          "size": "440x18",
+          "kind": "hud",
+          "bounds": { "x": -220, "y": 380, "w": 440, "h": 18 }
+        },
+        {
+          "id": "el.countdown_text",
+          "element": "CountdownArtText",
+          "position": "center",
+          "content": "3",
+          "kind": "hud",
+          "notes": "Art-text countdown 3-2-1-GO; uses asset.countdown_art."
+        },
+        {
+          "id": "el.forehead_ring",
+          "element": "ForeheadCatcherRing",
+          "position": "at-projected-forehead",
+          "size": "180x180",
+          "kind": "playable",
+          "notes": "Golden ring showing the catcher hit area; follows the forehead anchor."
+        },
+        {
+          "id": "el.score_popup",
+          "element": "ScorePopupArtText",
+          "position": "above-forehead-ring",
+          "content": "+1",
+          "kind": "hud",
+          "notes": "Art-text +1 / +3 / -2 popup; uses asset.score_art."
+        },
+        {
+          "id": "el.snow_layer",
+          "element": "SnowLayer",
+          "position": "full-screen-behind-hud",
+          "kind": "decoration",
+          "notes": "Drifting snowflakes behind the HUD, never opaque."
+        },
+        {
+          "id": "el.miss_flash",
+          "element": "RedFlashOverlay",
+          "position": "full-screen",
+          "opacity": 0.35,
+          "translucent": true,
+          "kind": "decoration",
+          "notes": "Red translucent flash on a miss, alpha animated from script."
+        }
+      ]
+    },
+    {
+      "name": "ResultScreen",
+      "role": "result",
+      "initial_visible": false,
+      "layout": [
+        {
+          "id": "el.result_card",
+          "element": "ResultCardPanel",
+          "position": "center",
+          "size": "620x760",
+          "opacity": 0.82,
+          "translucent": true,
+          "kind": "decoration",
+          "notes": "Translucent festive card; the face stays visible around it."
+        },
+        {
+          "id": "el.result_title",
+          "element": "ResultTitleArtText",
+          "position": "upper-center",
+          "content": "TIME UP!",
+          "kind": "result",
+          "notes": "Art-text result banner; uses asset.title_art."
+        },
+        {
+          "id": "el.result_score",
+          "element": "FinalScoreArtText",
+          "position": "center",
+          "content": "SCORE 0",
+          "kind": "result",
+          "notes": "Art-text final score reveal; uses asset.score_art."
+        },
+        {
+          "id": "el.result_rank",
+          "element": "RankText",
+          "position": "below-score",
+          "content": "Flexible Christmas Elf",
+          "kind": "result"
+        },
+        {
+          "id": "el.share_copy",
+          "element": "ShareCopyText",
+          "position": "lower-card",
+          "content": "@ your clumsiest friend to challenge!",
+          "kind": "result"
+        },
+        {
+          "id": "el.effect_copy",
+          "element": "EffectCopyText",
+          "position": "above-retry",
+          "content": "Tap below to make a duet with this effect!",
+          "kind": "result"
+        },
+        {
+          "id": "el.retry_button",
+          "element": "RetryButton",
+          "position": "bottom-safe",
+          "content": "PLAY AGAIN",
+          "kind": "button",
+          "interactive": true,
+          "bounds": { "x": -120, "y": -330, "w": 240, "h": 80 }
+        }
+      ]
+    }
+  ],
+  "interactions": [
+    {
+      "kind": "record_start_reset",
+      "trigger": "RecordStart event",
+      "response": "Reset score to 0, misses to 0, consecutive misses to 0, timer to 45, speed to base, clear all falling items, show CalibrationScreen and hide GameplayScreen and ResultScreen.",
+      "state_change": "ANY -> CALIBRATION"
+    },
+    {
+      "kind": "gameplay_action",
+      "trigger": "Forehead anchor held within 90 px of the red calibration line for 0.6 s",
+      "response": "Play the countdown 3-2-1-GO on the gameplay screen, then begin spawning falling hats.",
+      "state_change": "CALIBRATION -> COUNTDOWN -> PLAYING",
+      "target": { "scope": "screen_element", "screen_element_ids": ["el.calib_redline"] },
+      "feedback": {
+        "visual": "Calibration line turns green and pulses, countdown art text pops in the center",
+        "audio_asset_id": "audio.countdown_tick"
+      }
+    },
+    {
+      "kind": "gameplay_action",
+      "trigger": "Falling item overlaps the projected forehead ring point",
+      "response": "Normal hat adds 1 point, gold gift adds 3 points and raises spawn speed, bad bomb subtracts 2 points and adds one miss; the item is recycled to the pool.",
+      "state_change": null,
+      "target": { "scope": "asset", "asset_ids": ["asset.cap_normal", "asset.cap_gold", "asset.bad_bomb"] },
+      "feedback": {
+        "visual": "Item pops with a golden star burst, art-text score popup rises above the ring, HUD score bumps",
+        "audio_asset_id": "audio.catch_hat"
+      }
+    },
+    {
+      "kind": "gameplay_action",
+      "trigger": "A bad bomb touches the forehead ring and on every item that falls past the bottom edge uncaught",
+      "response": "Add one miss, shake the camera, flash the screen red and update the miss icons; reaching 10 total misses or 5 consecutive misses ends the round immediately.",
+      "state_change": "PLAYING -> RESULT when the miss limit is hit",
+      "target": { "scope": "screen_element", "screen_element_ids": ["el.miss_flash"] },
+      "feedback": {
+        "visual": "Red translucent screen flash plus a short camera shake and a shrinking miss icon",
+        "audio_asset_id": "audio.explode"
+      }
+    },
+    {
+      "kind": "screen_transition",
+      "trigger": "45 second timer expires",
+      "response": "Hide GameplayScreen, show ResultScreen with the final score, rank title, share copy and duet copy.",
+      "state_change": "PLAYING -> RESULT",
+      "feedback": {
+        "visual": "Result card scales in with a soft glow while remaining camera feed stays visible",
+        "audio_asset_id": "audio.result"
+      }
+    },
+    {
+      "kind": "retry",
+      "trigger": "Tap the RetryButton",
+      "response": "Reset score, misses, consecutive misses and timer, clear the item pool and return to the calibration screen.",
+      "state_change": "RESULT -> CALIBRATION",
+      "feedback": {
+        "visual": "Retry button punch-scale and the result card slides out",
+        "audio_asset_id": "audio.countdown_tick"
+      }
+    }
+  ],
+  "assets": [
+    {
+      "id": "asset.cap_normal",
+      "role": "normal santa cap",
+      "description": "Cartoon red santa hat with white fur trim and a pompom, glossy storybook style, centered on transparent background, ready to fall down the screen.",
+      "is_background": false,
+      "count": 3,
+      "animated": false,
+      "kind": "visual",
+      "interactive_role": "spawnable_pool"
+    },
+    {
+      "id": "asset.cap_gold",
+      "role": "golden cap gift",
+      "description": "Golden santa cap with sparkles and a small gift box ribbon, shiny metallic highlights, bonus item worth three points, centered on transparent background.",
+      "is_background": false,
+      "count": 1,
+      "animated": false,
+      "kind": "visual",
+      "interactive_role": "spawnable_pool"
+    },
+    {
+      "id": "asset.bad_bomb",
+      "role": "green bad monster bomb",
+      "description": "Grumpy green monster holding a round black bomb with a lit fuse, clearly readable as a bad item, centered on transparent background for the falling item stream.",
+      "is_background": false,
+      "count": 1,
+      "animated": false,
+      "kind": "visual",
+      "interactive_role": "spawnable_pool"
+    },
+    {
+      "id": "asset.forehead_ring",
+      "role": "forehead catcher ring",
+      "description": "Soft golden ring with a glowing inner gradient and a small star marker at the center, no hard edges, sized to read as a catch hit area over the camera feed.",
+      "is_background": false,
+      "count": 1,
+      "animated": false,
+      "kind": "visual",
+      "interactive_role": "addressable_part"
+    },
+    {
+      "id": "asset.snowflake",
+      "role": "snowflake sprite",
+      "description": "Single soft white six-point snowflake with gentle blur, semi-transparent, used many times at different sizes for drifting snow over the camera feed.",
+      "is_background": false,
+      "count": 4,
+      "animated": false,
+      "kind": "visual",
+      "interactive_role": "decoration"
+    },
+    {
+      "id": "asset.star_burst",
+      "role": "golden star burst",
+      "description": "Radial golden star burst with sharp four-point sparkles and a warm glow, transparent background, played once when a hat is caught for hit feedback.",
+      "is_background": false,
+      "count": 2,
+      "animated": false,
+      "kind": "visual",
+      "interactive_role": "decoration"
+    },
+    {
+      "id": "asset.hud_plate",
+      "role": "hud pill plate",
+      "description": "Rounded dark red translucent pill plate with a thin gold border and subtle candy stripe, used behind the score and miss icons so text stays readable over the feed.",
+      "is_background": false,
+      "count": 2,
+      "animated": false,
+      "coverage": "partial",
+      "kind": "visual",
+      "interactive_role": "decoration"
+    },
+    {
+      "id": "asset.miss_icon",
+      "role": "miss icon",
+      "description": "Small hollow gold star outline that fills with dull grey when a miss is used, matching the cute festive HUD style, used five times in the miss icon row.",
+      "is_background": false,
+      "count": 5,
+      "animated": false,
+      "kind": "visual",
+      "interactive_role": "addressable_part"
+    },
+    {
+      "id": "asset.result_card",
+      "role": "result card panel",
+      "description": "Translucent deep red rounded card with gold snowflake border and soft inner vignette, sized to cover the middle of the screen without hiding the whole camera feed.",
+      "is_background": false,
+      "count": 1,
+      "animated": false,
+      "coverage": "partial",
+      "kind": "visual",
+      "interactive_role": "decoration"
+    },
+    {
+      "id": "asset.retry_button",
+      "role": "retry button plate",
+      "description": "Rounded bright red button plate with a gold rim and glossy highlight, sized for a two hundred forty by eighty retry button at the bottom of the result card.",
+      "is_background": false,
+      "count": 1,
+      "animated": false,
+      "kind": "visual",
+      "interactive_role": "addressable_part"
+    },
+    {
+      "id": "asset.countdown_art",
+      "role": "countdown and banner art text",
+      "description": "Curated decorative art text with heavy gradient fill and outline, reused for the 3-2-1-GO countdown, the START banner and the score popup moment.",
+      "is_background": false,
+      "count": 1,
+      "animated": false,
+      "kind": "art_text"
+    },
+    {
+      "id": "asset.title_art",
+      "role": "result title art text",
+      "description": "Curated arcade style art text with lit outline and glow, reused for the title on the calibration screen and the TIME UP banner on the result screen.",
+      "is_background": false,
+      "count": 1,
+      "animated": false,
+      "kind": "art_text"
+    },
+    {
+      "id": "audio.bgm",
+      "role": "festive background music",
+      "description": "Upbeat original chiptune holiday loop with sleigh bells and bells melody, about thirty seconds, looped for the whole session.",
+      "is_background": false,
+      "count": 1,
+      "animated": false,
+      "kind": "audio"
+    },
+    {
+      "id": "audio.countdown_tick",
+      "role": "countdown tick and button click",
+      "description": "Short bright bell tick used once per countdown number and reused as the retry button click sound.",
+      "is_background": false,
+      "count": 1,
+      "animated": false,
+      "kind": "audio"
+    },
+    {
+      "id": "audio.catch_hat",
+      "role": "hat catch sound",
+      "description": "Crisp pop and jingle chime played whenever a normal or golden hat lands inside the forehead ring.",
+      "is_background": false,
+      "count": 1,
+      "animated": false,
+      "kind": "audio"
+    },
+    {
+      "id": "audio.explode",
+      "role": "bomb explosion and miss sound",
+      "description": "Short muffled explosion with a descending buzz played on a bad bomb catch and on any uncaught item falling off screen.",
+      "is_background": false,
+      "count": 1,
+      "animated": false,
+      "kind": "audio"
+    },
+    {
+      "id": "audio.result",
+      "role": "result fanfare",
+      "description": "Two second festive fanfare with bells and a rising chord played when the result card reveals the final score and rank.",
+      "is_background": false,
+      "count": 1,
+      "animated": false,
+      "kind": "audio"
+    }
+  ],
+  "random_behaviors": [
+    {
+      "what": "which item type spawns",
+      "range": "65 percent normal cap, 15 percent golden gift, 20 percent bad bomb",
+      "verify_strategy": "Force spawn 20 items in preview and log the type counts, confirm the split is within 15 percent of the target weights."
+    },
+    {
+      "what": "spawn horizontal position",
+      "range": "uniform random x between -280 and 260 in screen space",
+      "verify_strategy": "Capture three gameplay screenshots and confirm every spawned item starts within the horizontal safe bounds."
+    },
+    {
+      "what": "fall speed after each five correct catches",
+      "range": "plus 10 percent of the base speed per five catches, capped at 1.8 times base",
+      "verify_strategy": "Log the speed multiplier after every fifth catch and confirm it ramps 1.0 to 1.1 to 1.2 and stops at 1.8."
+    }
+  ],
+  "camera_feed_constraints": {
+    "tracking_type": "head",
+    "tracking_range": "full screen; the face stays visible in the center band while HUD elements hug the top and bottom safe-zone edges",
+    "user_image_visible": true,
+    "composition": "none"
+  },
+  "mechanic": {
+    "class": "other",
+    "description": "Head-tracked catching game: pooled hats, golden gifts and bad bombs fall from the top of the screen and the user catches the good ones with a forehead ring projected from the head tracker. Weighted item mix, speed ramp every five catches, and loss on ten total misses or five consecutive misses.",
+    "parameters": {
+      "base_fall_speed_px_per_sec": 300,
+      "spawn_interval_sec": 0.85,
+      "speed_multiplier_per_5_correct": 0.1,
+      "max_speed_multiplier": 1.8,
+      "score_normal": 1,
+      "score_gold": 3,
+      "score_bad": -2,
+      "gold_speed_boost": 0.3,
+      "catch_radius_px": 92,
+      "max_misses": 10,
+      "max_consecutive_misses": 5,
+      "calibration_hold_sec": 0.6,
+      "pool_size": 9,
+      "hit_test": "screen_distance_to_projected_forehead"
+    }
+  },
+  "criteria": [
+    { "category": "layout", "check": "Score counter sits top-left, five miss icons top-right and the timer bar above them, all inside the safe zone." },
+    { "category": "layout", "check": "No opaque full-screen panel covers the camera feed on any of the three screens; the result card is translucent." },
+    { "category": "state", "check": "RecordStart resets score, misses, timer and item pool and returns to the calibration screen." },
+    { "category": "state", "check": "Holding the head on the red line for 0.6 seconds starts the 3-2-1-GO countdown and then playing." },
+    { "category": "state", "check": "Ten total misses or five consecutive misses ends the round immediately with the result screen." },
+    { "category": "state", "check": "The retry button returns to calibration with a fully reset game state." },
+    { "category": "value", "check": "Normal hat is plus one, golden gift is plus three with a thirty percent speed boost, bad bomb is minus two and counts one miss." },
+    { "category": "value", "check": "Each five correct catches raises the global fall speed by ten percent up to one point eight times the base speed." },
+    { "category": "boundary", "check": "The round always ends at forty five seconds even if no miss limit is reached." },
+    { "category": "boundary", "check": "Score never drops below zero and the miss icon row never shows fewer than zero icons." },
+    { "category": "random", "check": "Spawned item types follow the sixty five fifteen twenty weighting over a sample of twenty spawns." },
+    { "category": "camera_feed", "check": "The camera feed stays visible and the foreground never hides the whole face region." },
+    { "category": "visual", "check": "A catch produces a golden star burst and a rising art-text score popup, a miss flashes red with a screen shake." }
+  ],
+  "mechanic_refs": [
+    {
+      "mechanic_id": "chef_hat_catch",
+      "borrowed_elements": [
+        "falling item stream from the top of the screen",
+        "head-tracked catch position for the player",
+        "score counter in the top-left HUD",
+        "small festive sticker framing near the user's head"
+      ]
+    },
+    {
+      "mechanic_id": "collecting_dodge",
+      "borrowed_elements": [
+        "miss and life icons row under the score",
+        "pooled falling item prefabs recycled after each catch",
+        "three screen flow with a result screen and retry button"
+      ]
+    }
+  ]
+}

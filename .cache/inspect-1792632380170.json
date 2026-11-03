@@ -1,0 +1,8 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"kind\": \"sceneObject\",\n  \"guid\": \"s47\",\n  \"name\": \"Snow0\",\n  \"visible\": true,\n  \"children\": [],\n  \"components\": [\n    {\n      \"type\": \"ScreenTransform\",\n      \"guid\": \"c91\",\n      \"enabled\": true,\n      \"horizontalConstraint\": \"FIXED\",\n      \"verticalConstraint\": \"FIXED\",\n      \"offsets\": { \"x\": -360, \"y\": 360, \"z\": -640, \"w\": 640 },\n      \"anchoredPosition\": { \"x\": 0, \"y\": 0 },\n      \"sizeDelta\": { \"x\": 720, \"y\": 1280 },\n      \"pivot\": { \"x\": 0.5, \"y\": 0.5 },\n      \"rotation\": 0,\n      \"scale\": { \"x\": 1, \"y\": 1 },\n      \"pixelsPerUnit\": 32,\n      \"anchors\": { \"x\": 0.5, \"y\": 0.5, \"z\": 0.5, \"w\": 0.5 }\n    },\n    {\n      \"type\": \"Image\",\n      \"guid\": \"c92\",\n      \"enabled\": true,\n      \"sharedMaterial\": { \"guid\": \"r31\" },\n      \"texture\": { \"guid\": \"r20\" },\n      \"segTex\": { \"guid\": \"undefined\" },\n      \"segBlendMode\": \"NORMAL\",\n      \"segRadius\": 0.5,\n      \"segSoftness\": 0.5,\n      \"blendMode\": \"Normal\",\n      \"opacity\": 1,\n      \"color\": { \"r\": 1, \"g\": 1, \"b\": 1, \"a\": 1 },\n      \"size\": { \"x\": 10, \"y\": 10 },\n      \"pivot\": { \"x\": 0.5, \"y\": 0.5 },\n      \"flipX\": false,\n      \"flipY\": false,\n      \"drawMode\": \"Normal\",\n      \"stretchMode\": \"Fit\",\n      \"filledType\": \"Horizontal\",\n      \"startPoint\": 0,\n      \"filledRange\": 1,\n      \"ellipseX\": 1,\n      \"ellipseY\": 1\n    }\n  ],\n  \"renderOrder\": 44,\n  \"enabled\": true\n}"
+    }
+  ]
+}

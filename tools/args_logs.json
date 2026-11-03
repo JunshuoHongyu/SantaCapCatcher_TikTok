@@ -1,0 +1,6 @@
+{
+  "intention": "Check for script compile errors and runtime exceptions after reopening the project.",
+  "level": "error",
+  "source": "all",
+  "limit": 40
+}

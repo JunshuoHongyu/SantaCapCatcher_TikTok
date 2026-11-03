@@ -1,0 +1,2123 @@
+﻿{
+  "tools": [
+    {
+      "name": "get_scene",
+      "description": "Get the current scene tree. Each object includes `enabled` (self state), `visible` (effective 鈥?false if any ancestor is hidden), and `renderOrder` (0-based hierarchy order; larger means rendered later/on top). By default returns summary (names, GUIDs, component types, mesh bounds, camera info) 鈥?use summary=false for full property values.\n\nScale controls for large scenes (compose together): `subtree` (a GUID) returns only that object and its descendants; `depth` (>=1) keeps only that many object levels (render-group children are level 1) and marks elided branches with `_childrenTruncated`; `names_only:true` returns a {guid,name,children} skeleton 鈥?the cheapest way to see the hierarchy shape, then drill in with `inspect` or a `subtree` call.\n\nReturns STATIC EDITOR data 鈥?does NOT reflect runtime script changes. To observe runtime state, use interact_by_dsl with screenshot or get_script_logs.\n\nCall after create/open project and after completing the static scene (before adding scripts).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "summary": {
+            "type": "boolean",
+            "description": "If true (default), return compact summary without component property values. Set to false for full details."
+          },
+          "subtree": {
+            "type": "string",
+            "description": "A scene object GUID. Return only that object and its descendants (scoped before depth/names_only). Errors if the GUID is not in the scene."
+          },
+          "depth": {
+            "type": "number",
+            "description": "Keep only this many object levels (>=1; render-group children are level 1). Objects at the limit drop their children and gain `_childrenTruncated` (count elided). Use to skim a deep hierarchy."
+          },
+          "names_only": {
+            "type": "boolean",
+            "description": "Return a minimal {guid, name, children} skeleton per object (no components/bounds). Cheapest hierarchy overview; combine with subtree/depth."
+          },
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "get_scene_view",
+      "description": "Capture the editor Scene panel as a PNG plus a JSON annotation sidecar mapping each scene object to its screen-pixel bounds. All 2D colliders are temporarily forced visible during the capture so their wireframes appear in the image 鈥?use this to self-verify collider alignment against the visual mesh, then iterate. Returns content as [image PNG, JSON text]. The JSON sidecar shape is {view: {mode, width, height}, objects: [{guid, name, screenBounds:{x,y,w,h}, screenBoundsNorm:{x,y,w,h}, colliderType?, colliderPoints?}], notes?}. COORDINATES: screenBounds are PIXELS of the attached Scene-panel image (top-left origin) and screenBoundsNorm is the same rect normalized to [0,1] OF THAT IMAGE 鈥?neither is a preview tap coordinate (the Scene camera pans/zooms independently of the preview frame). To tap a 2D object, derive the point from its ScreenTransform (anchoredPosition/sizeDelta at 720x1280, center origin y-up: tapX = 0.5 + X/720, tapY = 0.5 - Y/1280). Entries whose screenBounds are ~1px are origin markers for objects with no renderer/collider bounds, not real rects. For runtime debugging (script-driven state) use interact_by_dsl with screenshot instead 鈥?this tool reads the static editor scene.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "maxSize": {
+            "type": "number",
+            "description": "Maximum pixel length of the longer image side (default 1024). The image is downsized via sharp if the panel exceeds this; screenBounds are scaled accordingly."
+          },
+          "objectGuids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Optional subset of scene-object GUIDs to annotate. Omit to annotate every object in the scene."
+          },
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "list_resources",
+      "description": "List all resources in the current project, grouped by type (Material, Texture, Mesh, Script, SourceFile, etc.). Scripts include `class_name` and `is_component` (whether the engine registered it as a usable component 鈥?false means the decorator is wrong). SourceFiles (FBX, MP4/GIF) are grouped under \"SourceFile\".\n\nAutomatically includes `_annotation` for previously annotated assets. For texture assets WITHOUT annotations, preview images are returned inline so you can see what they are.\n\nIMPORTANT: After receiving preview images, you MUST call annotate() with descriptions for ALL un-annotated textures.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "type_filter": {
+            "type": "string",
+            "description": "Filter by resource type (e.g., \"Material\", \"Texture\", \"Mesh\", \"Script\", \"SourceFile\"). Omit to list all; an unmatched filter reports which types the project does have."
+          },
+          "preview_offset": {
+            "type": "number",
+            "description": "Offset into the list of un-annotated textures needing preview (default 0). Auto-previews are paged to keep the response small; after annotating the current batch, call again with the returned `_previewNextOffset` to fetch the next page. Annotated textures drop out of the set, so the loop converges."
+          },
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "inspect",
+      "description": "Inspect any GUID 鈥?automatically identifies whether it is a SceneObject, Component, Resource, or SourceFile and returns full information.\n\nFor SceneObjects: returns renderOrder, components with all property values, mesh bounds, camera info. Children are listed shallow ({guid, name}) 鈥?call inspect on a child GUID to drill in.\nFor Components: returns the component type and its CURRENT property values 鈥?including the wired values of a script's serialized fields 鈥?plus the owning SceneObject as `owner` when resolvable. Read these before editing a tuned field; a script's source default is not the value in the scene.\nFor Resources: returns type, provider, and properties.\nFor Prefab assets: additionally attaches `rootSceneObject` 鈥?the prefab's stored hierarchy (enriched + unified naming, without scene renderOrder). Pass `summary: true` to collapse it to a compact tree when the prefab is deep.\n\nReturns STATIC EDITOR data 鈥?does NOT reflect runtime script changes.\n\nFor a compact tree overview use get_scene instead.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "guid": {
+            "type": "string",
+            "description": "GUID to inspect (SceneObject, Component, Resource, or SourceFile)"
+          },
+          "summary": {
+            "type": "boolean",
+            "description": "For Prefab assets, collapse `rootSceneObject` to a compact tree (names, GUIDs, component types 鈥?no full property values). Default: false."
+          },
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "guid",
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "preview_asset",
+      "description": "Understand an asset by GUID. Supports textures (instant), materials (rendered on sphere, ~3s), and 3D meshes (rendered from multiple angles, ~6s).\n\nSmart caching:\n- If already visually annotated (not stale): returns the cached description immediately (no image).\n- If not visually annotated or stale: returns preview image(s). You MUST then call annotate() to save your understanding.\n\nNOTE: Material and mesh previews temporarily use the preview panel for rendering 鈥?it will restore automatically.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "guid": {
+            "type": "string",
+            "description": "GUID of the asset to preview (texture, material, or mesh)"
+          },
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "guid",
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "read_visual_scripting_graph",
+      "description": "Read the project's visual scripting graphs. Covers ALL THREE containers: the project graph (the node graph authored in the Visual Scripting panel, Graph/graph.json), every Custom Component Graph asset (reusable graphs attached to objects, Assets/**/*.compgraph), AND every Subgraph asset (reusable node groups, Assets/**/*.ssubgraph). Returns a compact tree of containers 鈫?nodes (with their ports, configured port values, and edges), recursing into Group subgraphs. Component types and property names are returned as unified names.\n\nUse this to understand or port visual scripting to APJS 鈥?it replaces hand-parsing Graph/graph.json and unzipping .compgraph / .ssubgraph assets.\n\nThe project graph appears under top-level `containers`; Custom Component Graphs under `componentGraphs[]` (each with `name`, `path`, `containers`); Subgraph assets under `subgraphs[]` (each with `name`, `path`, `interface` = the reuse `inputPorts`/`outputPorts`, and `graph` = the inner nodes/edges). A Subgraph's per-instance tuning values live on the collapsed Group port values at each USE SITE in the project graph, not in the asset definition.\n\nVisual scripting is LEGACY and READ-ONLY: use this to understand a graph, never to author or modify one. To move a graph project forward, add co-existing APJS or port the graph to APJS (see skills/VisualScriptingGraph).\n\nReturns STATIC on-disk data; if the user just edited a graph in the panel without saving, the file may be slightly stale. Returns {hasGraph: false} when the project has no project graph and no graph assets.\n\nPort/node Guid(...) references (targetGuid, or Entity/Component port values) map directly to the matching guid in Assets/main.scene.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "container_id": {
+            "type": "string",
+            "description": "Only return the container with this id (from a prior read_visual_scripting_graph call). Omit to return all containers."
+          },
+          "full": {
+            "type": "boolean",
+            "description": "Return the raw parsed graph JSON instead of the compact summary (large 鈥?use only when the summary omits a field you need)."
+          },
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "describe_project",
+      "description": "Get a compact overview of the CURRENTLY OPEN project 鈥?the fastest way to orient when continuing an existing (non-empty) project. Returns one text brief (no images) covering: the scene skeleton (render groups 鈫?top-level objects with their component types + child counts), scripts and which objects they are attached to, whether this is a legacy visual-scripting-GRAPH project (with the graph/component-graph/subgraph inventory), resources grouped by type with annotation coverage and cheap inline metadata (model size, audio duration, video dimensions), and the .ai-context.json handoff/annotation state.\n\nCall this FIRST when opening or continuing an existing project 鈥?it replaces the multi-call cold start (get_scene + per-asset inspect 脳 N + guessing whether a graph exists). Then drill in with inspect / native file reads / read_visual_scripting_graph / preview_asset as needed. Reads STATIC editor state (like get_scene) 鈥?not runtime.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "set_preview_video",
+      "description": "Switch the preview input video to match a specific AR tracking type. Required for AR effects 鈥?face tracking needs a face video, hand tracking needs a hand video, etc. Automatically selects a suitable video and reloads the preview. Use list_preview_videos to see all available options.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "tracking_type": {
+            "type": "string",
+            "description": "Tracking type: \"face\", \"hand\", \"body\", \"environment\", \"two_person\", or \"pet\"",
+            "enum": [
+              "face",
+              "hand",
+              "body",
+              "environment",
+              "two_person",
+              "pet"
+            ]
+          },
+          "video_name": {
+            "type": "string",
+            "description": "Specific video name (from list_preview_videos). Overrides tracking_type if both provided."
+          },
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "list_preview_videos",
+      "description": "List all available preview input videos grouped by tracking type. Shows which videos have local files (usable with set_preview_video). Use this to discover what AR tracking videos are available.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "get_current_preview_video",
+      "description": "Get the currently active preview input video. Returns the video name, tracking type, source type, and resource URL. For built-in AR preview videos, tracking_type is face, hand, body, environment, two_person, pet, or camera. For local, tool-provided, or offloaded media, tracking_type is null and source_type identifies how the input was loaded. Useful for checking which AR tracking video or media source is loaded before deciding whether to switch.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "query_knowledge",
+      "description": "Search the TTEH knowledge base before unfamiliar scene, component, resource, asset, template, or scripting work. Use one focused call per category; for multiple independent lookups, call this tool in parallel.\n\nUse `query` for broad discovery in English. Use exact lookup params when you already know the target name.\n\nCategories:\n- \"component\": component schemas and DSL wire-format help. Use `component_type` for exact lookup, or `query` to search.\n- \"object\": built-in scene object types. Use returned `object_type` with `add_builtin_object`.\n- \"skill\": topic guides and script examples. Use `query` to search skill catalog metadata; use `skill_categories` for exact SkillId lookup; use `tags` for script examples.\n- \"resource\": asset operations, resource creation, resource schemas, and built-in resources. Use `resource_type` for exact lookup, or `query` to search.\n- \"game_asset\": local importable asset files. Use `query` or `tags`.\n\nFor game-design / mechanic / template / visual-inspiration lookups, use the dedicated `search_game_design` tool instead.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": [
+              "component",
+              "object",
+              "skill",
+              "resource",
+              "game_asset"
+            ],
+            "description": "Knowledge category to query"
+          },
+          "query": {
+            "type": "string",
+            "description": "English search phrase for broad discovery."
+          },
+          "max_results": {
+            "type": "number",
+            "description": "Maximum number of search results (default: 5)."
+          },
+          "component_type": {
+            "type": "string",
+            "description": "Specific component type name (for category=\"component\"). E.g., \"Camera\", \"Transform\"."
+          },
+          "resource_type": {
+            "type": "string",
+            "description": "Specific resource type name (for category=\"resource\"). E.g., \"StandardPBR\"."
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Tag filter for skill script examples and game_asset. E.g., [\"animation\", \"rotation\"]."
+          },
+          "skill_categories": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Exact SkillId(s) for category=\"skill\", usually returned by a prior skill query."
+          },
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "category",
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "search_game_design",
+      "description": "Semantic search over the game mechanic catalog. Each mechanic represents a gameplay rule loop and carries **buildables** (DSL scaffolds you can apply via `apply_template`) and **visualReferences** (curated themes / concept art for borrowing layout + palette). Returns a single ranked list with per-mechanic tier (strong / weak).\n\nReplaces the previous two-call pattern of `query_knowledge(category=\"game_template\")` + `query_visual_inspiration` 鈥?one call covers both surfaces.\n\nUses all-MiniLM-L6-v2 sentence embeddings over each mechanic's `name + family + tags + gameplay`. Mechanics inspired by well-known external games carry the analogue in their text (e.g. \"Whack-a-mole style\", \"Angry Birds style\") so queries using those names bridge naturally.\n\n**Decision per mechanic**:\n- Strong tier AND your design's gameplay loop / win-lose / primary input all match the buildable 鈫?`apply_template`, then adapt theme / assets / params on top.\n- Strong tier BUT the core mechanic diverges (you'd have to rip out the scaffold's defining behaviour) 鈫?do NOT apply. Build your own and borrow specific elements / visuals. Applying a half-fit scaffold leaves the wrong core mechanic to patch around.\n- Weak tier 鈫?do not apply; borrow individual visual elements / layout only.\n- Borrowing (either tier) 鈫?record it via `mechanic_refs: [{mechanic_id, borrowed_elements: [...]}]`. `mechanic_id` is the MECHANIC id (result heading), never a buildable id 鈥?buildable ids belong only in `starter_template.template_id`.\n\n**MANDATORY for new/full game builds or major rebuilds** 鈥?call once with the gameplay loop + theme as the query, before `save_plan(type=\"game\")`.\n\nPhrase `query` as natural-language gameplay intent (\"paddle bouncing balls into brick wall\", \"tap to drop merging fruit\", \"spin a wheel of my friends\"). Token-stuffing is unnecessary.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Natural-language gameplay intent + theme. Examples: \"tap to merge falling fruit\", \"AR head-tilt quiz\", \"slingshot at friend tower\", \"endless lane-switch runner\"."
+          },
+          "max_results": {
+            "type": "number",
+            "description": "Maximum mechanics returned across both tiers (default 12). Use a small number (5鈥?) for top picks; raise to 20+ for the full weak-tier tail."
+          },
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "query",
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "log",
+      "description": "Send a log message that appears in the MCP Operations panel. Use this to communicate progress while working and to summarize what you did after finishing. This helps the user follow your progress in real time.\n\nPERSISTENCE: level=\"summary\" is saved to the project for cross-session handoff 鈥?the next Agent session receives it when opening the project (via get_handoff_context). level=\"info\" is display-only. Use save_plan to persist the structured plan itself.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Free-form log/handoff text. Required for both level=\"info\" and level=\"summary\"."
+          },
+          "level": {
+            "type": "string",
+            "enum": [
+              "summary",
+              "info"
+            ],
+            "description": "Message type: \"info\" for general status (default, display-only), \"summary\" for the cross-session handoff note persisted to the project."
+          },
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "save_plan",
+      "description": "Save or update the project handoff plan.\n\nBefore persisting type=\"game\": confirm the design reflects what the user asked for, not intent you guessed from a thin prompt. This tool validates that the plan is complete and consistent, NOT that it is the effect the user wanted 鈥?a well-formed plan for the wrong game still passes. If the core loop, win/lose, primary input, or interaction targets rest on a guess, clarify with one closed-ended question first (see AGENTS.md Rule #0 / Screening); do not encode a guess as the contract.\n\nRead skills/Planning/SKILL.md before calling this tool. Both plan types require scene_representation so the 2D/3D construction decision, layers, requirements, limitations, and verification evidence are explicit before scene editing. Submit the complete Phase 2 plan in one call; do not use this for local changes that preserve the existing contract.\n\nPreferred scene item shapes: requirements[] = {id, description, must}; layers[] = {id, role, description, space, content_form, requirement_refs}; verification[] = {id, description, requirement_refs, views_or_states, success_criteria}. Layer and verification requirement_refs are the input source of truth; reciprocal references are derived before canonical validation and persistence. Compact descriptor strings and success_criteria string arrays are normalized automatically.\n\nHigh-risk pre-submit checklist (complete rule list lives in skills/Planning/SKILL.md and the input schema): include starter_template using one of two modes 鈥?{mode: \"selected\", template_id} when a strong-tier buildable has a core loop + win/lose + primary input that all match your design and you apply it (then adapt theme/assets on top), or {mode: \"none\", rationale} when no scaffold core loop matches and you build from scratch; borrow specific elements/visuals from search results via mechanic_refs regardless of mode; include mechanic_refs (from search_game_design) OR mechanic_rationale (>=30 chars); each borrowed_elements entry must be reflected in assets/screens/interactions; include record_start_reset and retry interactions; include a result screen with a retry element; if any asset has is_background: true, set camera_feed_constraints.composition: segmentation_portrait and composition_option; if game_type.camera_feed: hidden, include camera_feed_hidden_rationale (>=30 chars, based on prompt rejection + reason); keep assets[].id and screens[].layout[].id unique when present, and make interaction target ids reference those ids; gameplay_action should include feedback.visual.\n\nDo not continue to Phase 3, asset sourcing, scene build, scripting, review, or apply_template until type=\"game\" returns success: true. Warnings persist but indicate risks to fix when practical.\n\nUse type=\"general\" with scene_representation and content for non-game plans. Unknown requirement, space, and content-form values are accepted; prefer custom.* names and place experimental metadata under extensions. Missing fallback behavior defaults to adapt_and_verify for unknown requirements and stop_and_explain for unmet must requirements. Use log(level=\"summary\") for final built-state handoff summaries.",
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "scene_representation",
+          "intention"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "game",
+              "general"
+            ],
+            "description": "Plan type. Use \"game\" for schema-validated Game Design Docs and \"general\" for non-game plans."
+          },
+          "content": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Required when type=\"general\". Non-game implementation details saved beside scene_representation."
+          },
+          "scene_representation": {
+            "type": "object",
+            "description": "Scene construction contract. Requirement ids and all kind values are open strings; unknown metadata belongs under extensions.",
+            "required": [
+              "planning_mode",
+              "decision_summary",
+              "space",
+              "content_form",
+              "requirements",
+              "layers",
+              "verification"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "planning_mode": {
+                "enum": [
+                  "explicit",
+                  "adaptive",
+                  "not_applicable"
+                ],
+                "description": "Use explicit for a decided representation, adaptive for unseen needs refined during build, and not_applicable only when scene construction is unchanged."
+              },
+              "decision_summary": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Concise explanation of the chosen space, content form, layers, and important tradeoffs."
+              },
+              "space": {
+                "description": "Where or how content is represented. Prefer {kind, description}; a non-empty kind string is expanded automatically.",
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "required": [
+                      "kind",
+                      "description"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "kind": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "description": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "extensions": {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    }
+                  },
+                  {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                ]
+              },
+              "content_form": {
+                "description": "Where or how content is represented. Prefer {kind, description}; a non-empty kind string is expanded automatically.",
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "required": [
+                      "kind",
+                      "description"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "kind": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "description": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "extensions": {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    }
+                  },
+                  {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                ]
+              },
+              "requirements": {
+                "type": "array",
+                "description": "Observable user requirements. Layer and verification back-references are derived from matching requirement_refs.",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "description",
+                    "must"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Stable open-vocabulary requirement id."
+                    },
+                    "description": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Observable requirement stated without implementation ambiguity."
+                    },
+                    "must": {
+                      "type": "boolean",
+                      "description": "true for a non-negotiable requirement; false for a best-effort requirement."
+                    },
+                    "layer_refs": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "description": "Optional layer ids; derived from layers[].requirement_refs when omitted."
+                    },
+                    "verification_refs": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "description": "Optional verification ids; derived from verification[].requirement_refs when omitted."
+                    },
+                    "extensions": {
+                      "type": "object",
+                      "additionalProperties": true
+                    }
+                  }
+                }
+              },
+              "layers": {
+                "type": "array",
+                "description": "Construction layers and the requirements each layer implements.",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "role",
+                    "description",
+                    "space",
+                    "content_form",
+                    "requirement_refs"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Stable layer id referenced by the contract."
+                    },
+                    "role": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Short human-readable responsibility of the layer."
+                    },
+                    "description": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "What the layer contains and how it participates in the composition."
+                    },
+                    "space": {
+                      "description": "Where or how content is represented. Prefer {kind, description}; a non-empty kind string is expanded automatically.",
+                      "oneOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "kind",
+                            "description"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "kind": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "description": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "extensions": {
+                              "type": "object",
+                              "additionalProperties": true
+                            }
+                          }
+                        },
+                        {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      ]
+                    },
+                    "content_form": {
+                      "description": "Where or how content is represented. Prefer {kind, description}; a non-empty kind string is expanded automatically.",
+                      "oneOf": [
+                        {
+                          "type": "object",
+                          "required": [
+                            "kind",
+                            "description"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "kind": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "description": {
+                              "type": "string",
+                              "minLength": 1
+                            },
+                            "extensions": {
+                              "type": "object",
+                              "additionalProperties": true
+                            }
+                          }
+                        },
+                        {
+                          "type": "string",
+                          "minLength": 1
+                        }
+                      ]
+                    },
+                    "requirement_refs": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "description": "Existing requirement ids implemented by this layer."
+                    },
+                    "extensions": {
+                      "type": "object",
+                      "additionalProperties": true
+                    }
+                  }
+                }
+              },
+              "limitations": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": "Known approximation or implementation limits that matter during review."
+              },
+              "verification": {
+                "type": "array",
+                "description": "Observable checks and the requirements each check proves.",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "description",
+                    "requirement_refs",
+                    "views_or_states",
+                    "success_criteria"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "Stable verification id referenced by the contract."
+                    },
+                    "description": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "How the verification is performed."
+                    },
+                    "requirement_refs": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "description": "Existing requirement ids proved by this verification."
+                    },
+                    "views_or_states": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "description": "Concrete preview views, poses, interactions, or runtime states to inspect."
+                    },
+                    "success_criteria": {
+                      "description": "One or more observable pass conditions. String arrays are joined into the canonical persisted string.",
+                      "oneOf": [
+                        {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string",
+                            "minLength": 1
+                          }
+                        }
+                      ]
+                    },
+                    "extensions": {
+                      "type": "object",
+                      "additionalProperties": true
+                    }
+                  }
+                }
+              },
+              "fallbacks": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "unknown_requirement": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "unmet_must": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "extensions": {
+                    "type": "object",
+                    "additionalProperties": true
+                  }
+                },
+                "description": "Optional open-string fallback behavior. Omitted values receive safe defaults during persistence."
+              },
+              "extensions": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            }
+          },
+          "starter_template": {
+            "type": "object",
+            "required": [
+              "mode",
+              "rationale"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "mode": {
+                "enum": [
+                  "selected",
+                  "none"
+                ]
+              },
+              "template_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "rationale": {
+                "type": "string",
+                "minLength": 20
+              }
+            },
+            "allOf": [
+              {
+                "if": {
+                  "type": "object",
+                  "required": [
+                    "mode"
+                  ],
+                  "properties": {
+                    "mode": {
+                      "const": "selected"
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "template_id"
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "type": "object",
+                  "required": [
+                    "mode"
+                  ],
+                  "properties": {
+                    "mode": {
+                      "const": "none"
+                    }
+                  }
+                },
+                "then": {
+                  "not": {
+                    "required": [
+                      "template_id"
+                    ]
+                  }
+                }
+              }
+            ]
+          },
+          "game_type": {
+            "type": "object",
+            "required": [
+              "camera_feed",
+              "ar_tracking",
+              "core_loop_seconds",
+              "total_duration_seconds"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "camera_feed": {
+                "enum": [
+                  "visible",
+                  "hidden"
+                ]
+              },
+              "camera_feed_hidden_rationale": {
+                "type": "string",
+                "minLength": 30
+              },
+              "ar_tracking": {
+                "enum": [
+                  "face",
+                  "hand",
+                  "head",
+                  "body",
+                  "none"
+                ]
+              },
+              "core_loop_seconds": {
+                "type": "number",
+                "minimum": 1,
+                "maximum": 10
+              },
+              "total_duration_seconds": {
+                "type": "number",
+                "minimum": 10,
+                "maximum": 90
+              }
+            }
+          },
+          "screens": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "role",
+                "layout",
+                "initial_visible"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "role": {
+                  "enum": [
+                    "intro",
+                    "gameplay",
+                    "result",
+                    "menu"
+                  ]
+                },
+                "layout": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "element",
+                      "position"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "element": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "position": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "size": {
+                        "type": "string"
+                      },
+                      "content": {
+                        "type": "string"
+                      },
+                      "notes": {
+                        "type": "string"
+                      },
+                      "kind": {
+                        "enum": [
+                          "hud",
+                          "button",
+                          "playable",
+                          "decoration",
+                          "result"
+                        ]
+                      },
+                      "interactive": {
+                        "type": "boolean"
+                      },
+                      "opacity": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                      },
+                      "translucent": {
+                        "type": "boolean"
+                      },
+                      "bounds": {
+                        "type": "object",
+                        "required": [
+                          "x",
+                          "y",
+                          "w",
+                          "h"
+                        ],
+                        "additionalProperties": false,
+                        "properties": {
+                          "x": {
+                            "type": "number"
+                          },
+                          "y": {
+                            "type": "number"
+                          },
+                          "w": {
+                            "type": "number",
+                            "minimum": 0
+                          },
+                          "h": {
+                            "type": "number",
+                            "minimum": 0
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "initial_visible": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "interactions": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "required": [
+                "kind",
+                "trigger",
+                "response",
+                "state_change"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "enum": [
+                    "record_start_reset",
+                    "retry",
+                    "screen_transition",
+                    "gameplay_action"
+                  ]
+                },
+                "trigger": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "response": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "state_change": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "target": {
+                  "type": "object",
+                  "required": [
+                    "scope"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "scope": {
+                      "enum": [
+                        "screen",
+                        "asset",
+                        "screen_element",
+                        "none"
+                      ]
+                    },
+                    "asset_ids": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "screen_element_ids": {
+                      "type": "array",
+                      "minItems": 1,
+                      "items": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "rationale": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                },
+                "feedback": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "visual": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "audio": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "audio_asset_id": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "haptic": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "assets": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "role",
+                "description",
+                "is_background",
+                "count",
+                "animated"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "role": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "description": {
+                  "type": "string",
+                  "minLength": 30
+                },
+                "is_background": {
+                  "type": "boolean"
+                },
+                "count": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "animated": {
+                  "type": "boolean"
+                },
+                "animation_frames": {
+                  "type": "integer",
+                  "minimum": 2
+                },
+                "coverage": {
+                  "enum": [
+                    "full-screen",
+                    "partial"
+                  ]
+                },
+                "interactive_role": {
+                  "enum": [
+                    "static_bg",
+                    "addressable_part",
+                    "spawnable_pool",
+                    "decoration"
+                  ]
+                },
+                "kind": {
+                  "enum": [
+                    "visual",
+                    "audio",
+                    "art_text"
+                  ]
+                },
+                "anchor_in_parent": {
+                  "type": "object",
+                  "required": [
+                    "x",
+                    "y",
+                    "w",
+                    "h"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "x": {
+                      "type": "number"
+                    },
+                    "y": {
+                      "type": "number"
+                    },
+                    "w": {
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    "h": {
+                      "type": "number",
+                      "minimum": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "random_behaviors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "what",
+                "range",
+                "verify_strategy"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "what": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "range": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "verify_strategy": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          "camera_feed_constraints": {
+            "type": "object",
+            "required": [
+              "tracking_type",
+              "tracking_range",
+              "user_image_visible",
+              "composition"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "tracking_type": {
+                "enum": [
+                  "face",
+                  "hand",
+                  "head",
+                  "body",
+                  "none"
+                ]
+              },
+              "tracking_range": {
+                "type": "string",
+                "minLength": 1
+              },
+              "user_image_visible": {
+                "type": "boolean"
+              },
+              "composition": {
+                "enum": [
+                  "none",
+                  "segmentation_portrait"
+                ]
+              },
+              "composition_option": {
+                "enum": [
+                  "A",
+                  "B-bottom-left",
+                  "B-bottom-right",
+                  "B-bottom-center",
+                  "C",
+                  "face_inset"
+                ]
+              }
+            }
+          },
+          "mechanic": {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "class",
+                  "parameters"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "class": {
+                    "const": "tap_score"
+                  },
+                  "parameters": {
+                    "type": "object",
+                    "required": [
+                      "tap_target",
+                      "score_per_tap",
+                      "win_condition"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "tap_target": {
+                        "enum": [
+                          "cycle",
+                          "position",
+                          "area"
+                        ]
+                      },
+                      "score_per_tap": {
+                        "type": "number"
+                      },
+                      "tap_target_anywhere": {
+                        "type": "boolean"
+                      },
+                      "win_condition": {
+                        "oneOf": [
+                          {
+                            "type": "object",
+                            "required": [
+                              "type",
+                              "time_limit_sec"
+                            ],
+                            "additionalProperties": false,
+                            "properties": {
+                              "type": {
+                                "const": "time"
+                              },
+                              "time_limit_sec": {
+                                "type": "number",
+                                "minimum": 1
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "required": [
+                              "type",
+                              "target_count"
+                            ],
+                            "additionalProperties": false,
+                            "properties": {
+                              "type": {
+                                "const": "count"
+                              },
+                              "target_count": {
+                                "type": "integer",
+                                "minimum": 1
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "required": [
+                  "class",
+                  "parameters"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "class": {
+                    "const": "randomizer"
+                  },
+                  "parameters": {
+                    "type": "object",
+                    "required": [
+                      "outcome_pool",
+                      "reveal_duration_sec",
+                      "triggered_by"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "outcome_pool": {
+                        "type": "array",
+                        "minItems": 2,
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "weights": {
+                        "type": "array",
+                        "items": {
+                          "type": "number",
+                          "minimum": 0
+                        }
+                      },
+                      "reveal_duration_sec": {
+                        "type": "number",
+                        "minimum": 0.1
+                      },
+                      "triggered_by": {
+                        "enum": [
+                          "tap",
+                          "record_start",
+                          "time"
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "required": [
+                  "class",
+                  "parameters"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "class": {
+                    "const": "shooting"
+                  },
+                  "parameters": {
+                    "type": "object",
+                    "required": [
+                      "bullet_speed",
+                      "spawn_rate_per_sec",
+                      "target_hp",
+                      "win_condition"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "bullet_speed": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "spawn_rate_per_sec": {
+                        "type": "number",
+                        "minimum": 0
+                      },
+                      "target_hp": {
+                        "type": "integer",
+                        "minimum": 1
+                      },
+                      "win_condition": {
+                        "enum": [
+                          "time",
+                          "score",
+                          "kills"
+                        ]
+                      },
+                      "tap_target_anywhere": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "required": [
+                  "class",
+                  "parameters"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "class": {
+                    "const": "puzzle"
+                  },
+                  "parameters": {
+                    "type": "object",
+                    "required": [
+                      "win_condition"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "win_condition": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "grid": {
+                        "type": "object",
+                        "required": [
+                          "w",
+                          "h"
+                        ],
+                        "additionalProperties": false,
+                        "properties": {
+                          "w": {
+                            "type": "integer",
+                            "minimum": 1
+                          },
+                          "h": {
+                            "type": "integer",
+                            "minimum": 1
+                          }
+                        }
+                      },
+                      "move_limit": {
+                        "type": "integer",
+                        "minimum": 1
+                      },
+                      "pieces": {
+                        "type": "integer",
+                        "minimum": 1
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "required": [
+                  "class",
+                  "description",
+                  "parameters"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "class": {
+                    "const": "other"
+                  },
+                  "description": {
+                    "type": "string",
+                    "minLength": 30
+                  },
+                  "parameters": {
+                    "type": "object"
+                  }
+                }
+              }
+            ]
+          },
+          "criteria": {
+            "type": "array",
+            "minItems": 6,
+            "items": {
+              "type": "object",
+              "required": [
+                "category",
+                "check"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "category": {
+                  "enum": [
+                    "layout",
+                    "state",
+                    "value",
+                    "boundary",
+                    "random",
+                    "camera_feed",
+                    "visual"
+                  ]
+                },
+                "check": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          },
+          "mechanic_refs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "mechanic_id",
+                "borrowed_elements"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "mechanic_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "borrowed_elements": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                }
+              }
+            }
+          },
+          "mechanic_rationale": {
+            "type": "string",
+            "minLength": 30
+          },
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        }
+      }
+    },
+    {
+      "name": "project_status",
+      "description": "Get the current project status. Returns:\n- hasActiveProject: whether a project is currently loaded\n- path: project directory path\n- isSaved: whether the project has ever been saved to disk (false = new unsaved project)\n- isChanged: whether there are unsaved modifications since last save\n- projectID: unique project identifier\n- knowledge_workspace: (if available) absolute path of the knowledge workspace directory 鈥?the agent working folder carrying AGENTS.md/CLAUDE.md, APJS/ type definitions, and skills/. If your cwd is elsewhere, read knowledge files from this path.\n- handoff: (if present) context from the previous Agent session 鈥?includes summary (what was built/current state) and plan (canonical game or general plan; legacy raw general text remains readable). Prefer get_handoff_context() when you specifically need the persisted handoff.\n- templateMode: (if true) the project is a template 鈥?keep the \"Tips to customize the effect\" hierarchy group and template comments current with the build.\n\nIMPORTANT: create_project and open_project will FAIL if isSaved is false. You must save_project() first.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "get_changes",
+      "description": "List edits made to the project by SOMEONE OTHER than you 鈥?the user editing in the Effect House editor while you work, or a user undo/redo 鈥?since the project was opened (or since your last get_changes call). Use this when continuing existing work to detect that your in-context understanding may be stale.\n\nReturns:\n- changes: array of {name, kind (edit/undo/redo), secondsAgo} 鈥?the external edits, oldest first\n- graphChangedOnDisk: true if the visual scripting graph.json was modified since open (graph panel edits may not appear in `changes`)\n- count: number of external edits reported\n\nCalling this CONSUMES the reported changes 鈥?a subsequent call only shows edits made after this one. After a non-empty result, re-read the affected state (get_scene / native script reads / describe_project) before making edits, so you build on the current project rather than a stale model.\n\nCRITICAL 鈥?this is a POSITIVE signal only. `count: 0` does NOT mean the project matches your memory, and is never a reason to skip reading current state. It cannot see: edits made through MCP by another agent or automation session, anything that happened before the project was opened, or edits this call already consumed. Whenever a request refers to a specific object, script, or resource, verify it with get_scene / inspect / Read(\"<projectPath>/Assets/<script>.ts\") FIRST 鈥?regardless of what this tool returns. If you cannot find something the user refers to as being in the scene, re-read the scene before concluding it is absent.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "get_handoff_context",
+      "description": "Read cross-session handoff context from the active project .ai-context.json. Use this when opening or continuing an existing project, before deciding whether to update the Game Design Doc. Returns hasHandoff plus handoff.summary, handoff.plan, and handoff.updatedAt when present. Also returns handoff.autoBrief 鈥?a compact continuity baseline written automatically on every save (project stats + what changed since open), present even when no agent summary was written; treat agent-written summary/plan as authoritative and autoBrief as the fallback. This is the explicit tool for reading the project-local .ai-context.json; do not try to read that file from the workspace.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "create_project",
+      "description": "Create a new empty project. If a saved project is already open, it will be closed automatically.\n\nIMPORTANT: This tool will FAIL if the current project has unsaved work (isSaved=false or isChanged=true). You must call save_project() first. Only call this tool ONCE at the start of a session.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "open_project",
+      "description": "Open an existing project from a file path. If a saved project is already open, it will be closed automatically.\n\nIMPORTANT: If the current project has never been saved (isSaved=false), this tool will FAIL. You must call save_project(path=\"<directory>\") first before opening another project.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path to the project file"
+          },
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "path",
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "save_project",
+      "description": "Save the current project. Omit path to save in place (works once the project was previously saved or opened from disk); passing the current project's own directory is the same as saving in place. For new (unsaved) projects you MUST provide a path to an empty or non-existent directory 鈥?save-as never writes into a non-empty directory. path must be a project DIRECTORY, never an .ehproj file (e.g. /Projects/MyEffect, not /Projects/MyEffect/effect.ehproj). If the user specifies a save location, use that path. Otherwise, default to a subdirectory inside your current working directory (the workspace folder), e.g. `<cwd>/project`.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Save-as path: a new or empty directory (an existing non-empty directory is never written into). Passing the current project's own directory saves in place instead. Use the path the user requested, or default to a subdirectory of your current working directory (e.g. \"<cwd>/project\"). Omit to save in place."
+          },
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "get_script_logs",
+      "description": "Read the orionkit console log buffer 鈥?covers APJS script runtime output, script compile diagnostics, AUSL shader compile errors (`[AUSLCompiler]`), and material import logs (`[MaterialImporter]`). Despite the name, this tool is the generic console-log reader for any compile/runtime signal the engine emits. For routine checks after add_script/import_glsl, prefer the auto-collected `_compileCheck` field on the edit_by_dsl response. After a native `.omtl` edit, run get_material_status through edit_by_dsl instead. Call this tool when you need raw console context (e.g., what logs surrounded the error) or when _compileCheck is missing. Always use after a native file edit on a script under `Assets/` to verify the engine recompile succeeded 鈥?native edits have no inline `_compileCheck` result.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "type": "string",
+            "enum": [
+              "error",
+              "warning",
+              "info",
+              "all"
+            ],
+            "description": "Log level filter (default: \"all\")"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "compile",
+              "runtime",
+              "all"
+            ],
+            "description": "Log source filter: \"compile\" for compile/import diagnostics (TypeScript errors, AUSL shader errors, MaterialImporter messages) 鈥?\"runtime\" for console.log and runtime output only 鈥?\"all\" for everything (default: \"all\")"
+          },
+          "limit": {
+            "type": "number",
+            "description": "Maximum number of log entries to return (default: 50)"
+          },
+          "since": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "number"
+              }
+            ],
+            "description": "High-water fence: return only entries newer than this ISO-8601 timestamp (or epoch ms). The console buffer is machine-global and cumulative (a reload never clears it), so without a fence a read mixes this run with stale/foreign lines from other projects and sessions. Snapshot a fence before a reload/interaction (e.g. the newest entry's `time`) and pass it here after to get only this run's logs. Runtime entries carry second-precision times, so the fence keeps everything from the fence's own second onward 鈥?the snapshot entry itself may reappear; treat re-seen lines as already handled. Entries without a parseable `time` are dropped when fencing."
+          },
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "search_tiktok_sounds",
+      "description": "Search TikTok Sound Library by song, artist, or lyric keyword. Returns ranked music_id values, not Asset Library asset_ids. Omit query to get currently recommended songs. For a lyrics effect, keep require_lyrics=true (default), choose the best matching result, then call select_tiktok_sound. This tool only searches; it does not change the project or open the Sound Library window.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Optional song, artist, or lyric keyword, for example \"Talking Body\" or \"Tove Lo\". Omit for recommendations."
+          },
+          "require_lyrics": {
+            "type": "boolean",
+            "description": "Only return songs with verified KRC or LRC lyric data (default: true)."
+          },
+          "max_results": {
+            "type": "number",
+            "description": "Maximum ranked results to return (default: 5, max: 20)."
+          },
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "select_tiktok_sound",
+      "description": "Choose one lyric-bearing TikTok Sound for the active project. With selection_mode=\"user\", open the full Sound Library window, filter to lyric-bearing songs, and wait for an explicit user selection or cancellation. With selection_mode=\"agent\" (default), select the supplied music_id. This runs the same canonical selection flow as the Sound Library UI: it downloads sound metadata/lyrics, updates the project, and creates or refreshes the ordinary song Timeline. It does not create a Lyrics object, LyricsControllerJS, lyric track, or lyric clip. For APJS lyrics, call this before adding the Text + script component.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "music_id": {
+            "type": "string",
+            "description": "music_id returned by search_tiktok_sounds. Required when selection_mode=\"agent\"."
+          },
+          "selection_mode": {
+            "type": "string",
+            "enum": [
+              "agent",
+              "user"
+            ],
+            "description": "Use \"user\" only after the creator asks to choose in the full Sound Library window; otherwise use \"agent\" (default)."
+          },
+          "query": {
+            "type": "string",
+            "description": "Optional initial song/artist/lyric query for the full Sound Library window in user mode."
+          },
+          "timeout_ms": {
+            "type": "number",
+            "description": "How long user mode waits for selection before cancelling (default: 120000, minimum: 1000)."
+          },
+          "start_time": {
+            "type": "number",
+            "description": "Selected sound start offset in seconds (default: 0)."
+          },
+          "require_lyrics": {
+            "type": "boolean",
+            "description": "Reject the selection and restore the previous song if usable KRC/LRC lyrics are unavailable (default: true)."
+          },
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "search_library",
+      "description": "Search the TikTok Effect House Asset Library for stickers, filters, accessories, makeup, characters, screens, or reusable Game Module prefabs. Use category=\"game_module\" for prefab modules that bundle reusable game objects with scripts, such as counters, timers, joysticks, movement controls, selection, HP/progress bars, and settlement effects. Preferred source for **commodity visuals** 鈥?standard HUD icons (star, heart, coin), generic UI glyphs, stock particle frames, and any visual where curated quality is sufficient and the specific look is not central to the effect. For **hero visuals** (main character, theme-specific props, backgrounds tied to the effect's look) prefer `generate_image` instead 鈥?generated assets are higher-quality and theme-matched for distinctive visuals. Returns asset_ids for import_from_library; each result's description is cached as source metadata, but imported visuals/modules still need preview_asset plus edit_by_dsl/annotate before use. Do not use this for TikTok songs: use search_tiktok_sounds and select_tiktok_sound, which operate on music_id values.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search keyword (e.g., \"cat sticker\", \"vintage filter\", \"sunglasses\")"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "makeup",
+              "filter",
+              "screen",
+              "accessory",
+              "sticker",
+              "character",
+              "game_module"
+            ],
+            "description": "Asset category to search within"
+          },
+          "max_results": {
+            "type": "number",
+            "description": "Maximum results to return (default: 5)"
+          },
+          "interactive": {
+            "type": "boolean",
+            "description": "Whether to show results to the user for selection. Set to true when the user needs to pick an asset visually (default). Set to false for pure query / informational lookups where no user decision is needed yet."
+          },
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "query",
+          "category",
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "trending_effects",
+      "description": "Browse trending TikTok Effect House effects by category id (integer 0鈥?8). Pass only the numeric `category` 鈥?never category name strings. Default when the user does not specify: GreenScreen=13. Ids: UNKNOWN=0, ActionGames=1, NonBeautyGan=2, CharacterMakeup=3, FaceFusion=4, SocialGames=5, BackgroundCutout=6, Accessories=7, PuzzleGames=8, AigcI2V=9, AR=10, ScreenEffects=11, AigcI2I=12, GreenScreen=13, Null=14, Filters=15, Games=16, Avatar=17, SpeedGames=18, FeatureCutout=19, CarShootingBallGames=20, SplitScreen=21, Wallpapers=22, InteractiveRandomizer=23, Makeup=24, FeatureRandomizer=25, SocialRandomizer=26, Frames=27, Transformation=28. Use for inspiration or when the user asks what is popular. Returns effect names (and resource_id when present); not the same as search_library asset templates. For keyword asset lookup prefer search_library; for custom hero art prefer generate_image.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 28,
+            "default": 13,
+            "description": "Trending EffectKeyCategory id (0鈥?8). Examples: GreenScreen=13, Games=16, Makeup=24, AR=10, Transformation=28."
+          },
+          "max_results": {
+            "type": "number",
+            "default": 2,
+            "description": "Maximum results to return after fetch (default: 2). Server may return more; this caps the response."
+          },
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "edit_by_dsl",
+      "description": "Execute a batch of scene editing commands as a single call. The whole batch is preflighted first: a command that would definitely fail (unknown object/component type or property name, contradictory move_object params) rejects the batch atomically 鈥?nothing executes, and the error lists every violation. Execution is fail-fast: if a command fails at runtime, remaining commands are skipped; operations completed before the failure are preserved and the failing operation is rolled back. HARD PRECONDITION: before any construction-start command (creating/importing objects, resources, scripts, materials, prefabs, or render groups), save a valid game/general scene contract with save_plan. Read skills/Planning/SKILL.md first. Local tuning that preserves an existing contract may continue without replacing the plan. Supports alias/$ref for cross-command references.\n\nWhen the batch contains add_script / import_glsl commands, compile/import logs are automatically collected and returned in `_compileCheck` 鈥?no need to call get_script_logs separately.\n\nFor preview interactions (screenshot, touch, drag, wait, reset_preview, start_preview_record, stop_preview_record, record_preview_video_mp4, pause_preview, resume_preview, transport_preview_property), use interact_by_dsl instead.\n\nExample:\nEditByDsl({\n  intention: \"Add a cube and set its position\",\n  commands: [\n    {\n      \"commandType\": \"add_builtin_object\",\n      \"params\": { \"object_type\": \"Cube\" },\n      \"alias\": \"cube\"\n    },\n    {\n      \"commandType\": \"set_component\",\n      \"params\": {\n        \"guid\": { \"$ref\": \"cube\", \"componentType\": \"Transform\" },\n        \"properties\": [...]\n      }\n    }\n  ]\n})",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "intention": {
+            "type": "string",
+            "description": "Brief description of what this edit batch accomplishes"
+          },
+          "commands": {
+            "type": "array",
+            "description": "A native JSON array of command objects 鈥?NOT a string containing a serialized JSON array. Emit the value as an actual array (`commands: [ {...}, {...} ]`), never as quoted text (`commands: \"[ {...} ]\"`). See DSL_REFERENCE.md for available commands.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "commandType": {
+                  "type": "string"
+                },
+                "params": {
+                  "type": "object"
+                },
+                "alias": {
+                  "type": "string",
+                  "description": "Store result under this name for $ref in later commands"
+                },
+                "comment": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "commandType",
+                "params"
+              ]
+            }
+          }
+        },
+        "required": [
+          "commands",
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "capture_preview",
+      "description": "Verify the live preview in one call: reloads the scene (reset_preview), waits for the requested post-reload preview texture updates, then captures a screenshot and returns the image inline. This is the default way to visually verify a build after scene edits, scripts, assets, or layout changes 鈥?use it instead of hand-assembling reset_preview + screenshot via interact_by_dsl. The default 5-frame barrier reduces stale or transitional captures but does not guarantee that asynchronous algorithms, tracking, models, large resources, or delayed script behavior are ready. Increase post_reload_frames up to 30 for those effects, and use later wait + screenshot checkpoints when the result is absent, changing, or suspicious. For interactive verification that needs taps/drags/timing, use interact_by_dsl.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "intention": {
+            "type": "string",
+            "description": "What you want to verify"
+          },
+          "scale": {
+            "type": "number",
+            "description": "Optional screenshot downscale factor in (0,1). Defaults to 0.5. Use 1 when verifying size, layout, spacing, or object count 鈥?at 0.5 a full-canvas stray overlay reads as mild crowding."
+          },
+          "post_reload_frames": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 30,
+            "default": 5,
+            "description": "Number of preview texture updates to observe after the matching reload acknowledgement before taking the screenshot. Defaults to 5; increase it for effects that depend on asynchronous algorithms, tracking, models, or large resources."
+          }
+        },
+        "required": [
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "interact_by_dsl",
+      "description": "Drive a sequence of live interactive preview actions (taps, drags, holds, timed waits, pause/resume, record lifecycle, dual-instance transport). For initial-screen build verification, prefer `capture_preview` 鈥?it reloads the scene and screenshots the fresh runtime in one call. Verifying gated states of your own build (win/lose/result screens, input-triggered feedback) is a normal, expected use of this tool 鈥?runtime-state verification is a mandatory part of finishing a game build and does not need a special user request. Commands: screenshot, touch, touch_down, touch_up, drag, wait, reset_preview, start_preview_record, stop_preview_record, record_preview_video_mp4, pause_preview, resume_preview, transport_preview_property. For scene editing (add/set/delete objects), use edit_by_dsl instead. See skills/PreviewInteraction/SKILL.md for interaction patterns.\n\nExample:\n[\n  { \"commandType\": \"touch\", \"params\": { \"x\": 0.5, \"y\": 0.5 } },\n  { \"commandType\": \"wait\", \"params\": { \"ms\": 500 } },\n  { \"commandType\": \"screenshot\" }\n]",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "intention": {
+            "type": "string",
+            "description": "What you want to verify or test"
+          },
+          "commands": {
+            "type": "array",
+            "description": "A native JSON array of preview interaction commands 鈥?NOT a string containing a serialized JSON array. Emit the value as an actual array (`commands: [ {...}, {...} ]`), never as quoted text (`commands: \"[ {...} ]\"`). Available: screenshot, touch, touch_down, touch_up, drag, wait, reset_preview, start_preview_record, stop_preview_record, record_preview_video_mp4, pause_preview, resume_preview, transport_preview_property. Note: start_preview_record only simulates the user pressing Record (fires RecordStart to scripts, saves nothing); record_preview_video_mp4 captures preview pixels to an MP4 file.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "commandType": {
+                  "type": "string",
+                  "enum": [
+                    "screenshot",
+                    "touch",
+                    "touch_down",
+                    "touch_up",
+                    "drag",
+                    "wait",
+                    "reset_preview",
+                    "start_preview_record",
+                    "stop_preview_record",
+                    "record_preview_video_mp4",
+                    "pause_preview",
+                    "resume_preview",
+                    "transport_preview_property"
+                  ]
+                },
+                "params": {
+                  "type": "object"
+                },
+                "comment": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "commandType"
+              ]
+            }
+          }
+        },
+        "required": [
+          "commands",
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "apply_template",
+      "description": "Apply a Game Starter Kit buildable (formerly \"template\"). Loads the DSL and executes it atomically, creating the full scene structure (screens, UI, skeleton GameManager script). After applying, use get_scene() to see the created objects and customize for the user's needs.\n\nPre-conditions: call `search_game_design` first to find the right mechanic, then commit in `save_plan(type=\"game\")` via `starter_template: {mode: \"selected\", template_id: \"<buildable_id>\", rationale: \"...\"}`. For full-game builds, call apply_template only after `save_plan(type=\"game\")` returns success 鈥?the workflow gate blocks `edit_by_dsl` until the selected buildable is applied.\n\nApply ONLY when the search returned the buildable in the `strong` tier AND your design's gameplay loop, win/lose, and primary input all match. If the core mechanic diverges, do NOT apply: use `starter_template: {mode: \"none\", ...}`, build your own, and borrow specific elements/visuals via `mechanic_refs` instead.\n\nWhen the buildable ships placeholder slots, the response `hint` lists them inline with search_library candidates and generate_image fallback prompts 鈥?swap each before edit_by_dsl customization (apply_template does NOT source themed visuals).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "template_id": {
+            "type": "string",
+            "description": "Buildable ID from search_game_design results (e.g., \"quiz_trivia\", \"tap_reflex\", \"slingshot_knockdown\")"
+          },
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "template_id",
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "generate_image",
+      "description": "Generate a new 2D image asset and import it into the asset panel. Parallel-safe: when you need N independent images, launch N generate_image calls concurrently in the same turn rather than one at a time. Preferred source for visuals 鈥?main characters, key props, theme-specific backgrounds, anything the user named or themed (\"feed the cat\", \"space background\"). `generate_image` produces higher-quality, unique, theme-matched art versus generic library stock. For **commodity visuals** (standard HUD icons, generic stickers, stock particles) prefer `search_library` instead 鈥?it is zero-latency and library quality is already sufficient for non-distinctive assets. Supports three asset types: \"sticker\" (foreground with transparent background), \"background\" (full-frame image), \"frame\" (decorative border). IP / moderation: image generation has no built-in IP awareness and is *attracted* to famous, often-copyrighted designs 鈥?naming or even obliquely evoking a known character (e.g. \"Mario-inspired\", or \"a cartoon plumber with a red hat and an M\") tends to reproduce it and will cause an image generation failure from content moderation. Moderation judges the OUTPUT image, not just the prompt 鈥?concepts strongly tied to a franchise (masks, uniforms, iconic silhouettes) can be rejected even with original wording. Prompt for an *original* design that fits the spirit of the request; on a moderation rejection, rework toward a clearly different design and retry 鈥?do not resubmit the same prompt. Returns a 360px preview image plus {asset:{guid,name}, annotation:{source,description}}. After visually inspecting the returned image, call edit_by_dsl/annotate with what the image actually shows.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "asset_type": {
+            "type": "string",
+            "enum": [
+              "sticker",
+              "background",
+              "frame"
+            ],
+            "description": "Type of image asset to generate."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Text prompt describing the image to generate."
+          },
+          "style": {
+            "type": "string",
+            "enum": [
+              "General",
+              "2D Cartoon",
+              "2D Pixel",
+              "3D Pixel",
+              "Realistic",
+              "3D Cartoon"
+            ],
+            "description": "Visual style of the generated image. Defaults to \"General\"."
+          },
+          "aspect_ratio": {
+            "type": "string",
+            "enum": [
+              "1:1",
+              "9:16",
+              "16:9",
+              "4:3",
+              "3:4"
+            ],
+            "description": "Aspect ratio of the generated image. Defaults to \"1:1\"."
+          },
+          "name": {
+            "type": "string",
+            "description": "Short, descriptive name for the generated asset (e.g. \"RedCar\", \"NeonBolt\", \"FloralFrame\"). Used as the asset file name in the editor."
+          },
+          "seed": {
+            "type": "number",
+            "description": "Random seed for reproducible generation. Omit for a random seed."
+          },
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "asset_type",
+          "prompt",
+          "name",
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "generate_gif",
+      "description": "Generate an animated sticker (GIF) asset and import it into the asset panel as a Texture Sequence. Two-phase & asynchronous: this call submits the job and returns a task_id 鈥?it does NOT block until the animation is ready. The animation is driven by a single first frame: either pass an existing image asset via `input_asset_guid` (e.g. one you just made with generate_image), or omit it and provide a `prompt` (+ optional style/aspect_ratio) to auto-generate the first frame. The auto first frame is rendered on a plain gray background and is NOT pre-cut 鈥?final transparency is applied once to the animation per `cutout`, which yields cleaner results than animating an imperfect cutout. `motion_prompt` describes how the subject should move/animate. `duration` is the clip length in seconds (2-5, default 3). `cutout` (default true) keeps a transparent background (subject cutout); set false to keep the generated background. Output aspect ratio always follows the first frame (keep_ratio) 鈥?there is no ratio control. IP / moderation rules are identical to generate_image: prompt for an ORIGINAL design; a moderation rejection on the first frame or the animation means rework, not resubmit. Returns {task_id, first_frame:{guid,generated}} 鈥?then poll query_gif_task({task_id, name, motion_prompt}) roughly every 30s until it reports success or failure. Do other useful work between polls; never busy-wait.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Short, descriptive name for the generated animated asset (e.g. \"WavingCat\", \"SpinningCoin\"). Used as the asset file name."
+          },
+          "motion_prompt": {
+            "type": "string",
+            "description": "Describes how the subject should move/animate (e.g. \"the cat waves its paw and blinks\"). Required."
+          },
+          "input_asset_guid": {
+            "type": "string",
+            "description": "Optional. GUID of an existing image asset to use as the animation first frame. For the best GIF quality, use an image with a clean, solid gray background, a fully-visible subject, and crisp edges with NO white outline / die-cut border (NOT a pre-cut transparent sticker, NOT a busy scene) 鈥?final transparency is applied later per `cutout`. If omitted, a first frame is auto-generated from `prompt` on a plain gray background."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Text prompt for the first-frame image, used only when `input_asset_guid` is omitted. Describe the subject/appearance in POSITIVE terms only (its motion goes in `motion_prompt`). Do NOT add negative phrases like \"no border\", \"no white outline\", or \"no background\" 鈥?image models do not honor negation and will render exactly the things you name."
+          },
+          "style": {
+            "type": "string",
+            "enum": [
+              "General",
+              "2D Cartoon",
+              "2D Pixel",
+              "3D Pixel",
+              "Realistic",
+              "3D Cartoon"
+            ],
+            "description": "First-frame visual style (only when generating the first frame). Defaults to \"General\"."
+          },
+          "aspect_ratio": {
+            "type": "string",
+            "enum": [
+              "1:1",
+              "9:16",
+              "16:9",
+              "4:3",
+              "3:4"
+            ],
+            "description": "First-frame aspect ratio (only when generating the first frame). Defaults to \"1:1\"."
+          },
+          "duration": {
+            "type": "number",
+            "description": "Clip length in seconds (2-5). Defaults to 3."
+          },
+          "cutout": {
+            "type": "boolean",
+            "description": "Keep a transparent background (subject cutout). Defaults to true."
+          },
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "name",
+          "motion_prompt",
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "query_gif_task",
+      "description": "Poll a generate_gif task by task_id. Returns {status:\"pending\",progress} while running; on success imports the animation as a Texture Sequence and returns {status:\"success\", asset:{guid,name,type}, sequence:{frames,fps}}; on failure returns an error (with tnsModerationFailed set for content-moderation rejections 鈥?rework the prompt, do not resubmit). Pass `motion_prompt` so the imported asset can be annotated automatically. After success you must still visually inspect it (preview_asset) and annotate it before wiring it into the scene.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "description": "The task_id returned by generate_gif."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name for the imported animated asset (same as passed to generate_gif)."
+          },
+          "motion_prompt": {
+            "type": "string",
+            "description": "The animation description, used to auto-annotate the imported asset on success."
+          },
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "task_id",
+          "name",
+          "intention"
+        ]
+      }
+    },
+    {
+      "name": "cancel_gif_task",
+      "description": "Discard an in-flight generate_gif task by task_id (e.g. the user changed their mind).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "task_id": {
+            "type": "string",
+            "description": "The task_id returned by generate_gif."
+          },
+          "intention": {
+            "type": "string",
+            "description": "Briefly describe what you are trying to achieve with this call and why."
+          }
+        },
+        "required": [
+          "task_id",
+          "intention"
+        ]
+      }
+    }
+  ]
+}

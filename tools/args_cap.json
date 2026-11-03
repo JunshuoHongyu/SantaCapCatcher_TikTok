@@ -1,0 +1,5 @@
+{
+  "intention": "Verify the calibration screen renders correctly with the head-tracked ring, Chinese copy and start button after the modal dialog was dismissed.",
+  "scale": 0.7,
+  "post_reload_frames": 10
+}

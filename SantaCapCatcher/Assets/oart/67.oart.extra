@@ -1,0 +1,131 @@
+[
+  {
+    "guid": {
+      "a": "56883aa7-7f1c-99fc-5e18-e2d24b120384",
+      "b": ""
+    },
+    "extraType": "ArtTextResItem",
+    "name": "67",
+    "version": "0.1.0",
+    "rttiType": "ArtTextAsset",
+    "authorizationInfo": "",
+    "extendedInfo": {
+      "isVisibleInInspector": true,
+      "hideInPanel": false,
+      "expandInPanel": false
+    },
+    "letterFillMode": 0,
+    "letterColor": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "letterGradientQuality": 0,
+    "letterGradientColor1": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "letterGradientColor2": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "letterGradientColor3": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "letterGradientColorPos1": 0,
+    "letterGradientColorPos2": 1,
+    "letterGradientColorPos3": 0.5,
+    "letterGradientRangeMode": 1,
+    "letterGradientAngle": 90,
+    "textFillArea": 0,
+    "letterTextureScale": 1,
+    "letterTextureOffsetX": 0,
+    "letterTextureOffsetY": 0,
+    "letterTextureFlipX": false,
+    "letterTextureFlipY": false,
+    "letterTextureAlpha": 1,
+    "letterTextureAngle": 0,
+    "letterTextureRange": -1,
+    "letterAlpha": 1,
+    "outlineLayers": [
+      {
+        "_rtti": {
+          "handle": 1200098860
+        },
+        "_typedRtti": {
+          "handle": 1200098860
+        },
+        "_gradientQuality": 0,
+        "_gradientColor1": {
+          "r": 0.9843137264251709,
+          "g": 0.6313725709915161,
+          "b": 0.10588235408067703,
+          "a": 1
+        },
+        "_gradientColor2": {
+          "r": 0.9411764740943909,
+          "g": 0.10980392247438431,
+          "b": 0.10980392247438431,
+          "a": 1
+        },
+        "_gradientColor3": {
+          "r": 1,
+          "g": 1,
+          "b": 1,
+          "a": 1
+        },
+        "_gradientColorPos1": 0,
+        "_gradientColorPos2": 1,
+        "_gradientColorPos3": 0.5
+      }
+    ],
+    "shadowLayers": [
+      {
+        "_rtti": {
+          "handle": 865192568
+        },
+        "_typedRtti": {
+          "handle": 865192568
+        },
+        "_gradientQuality": 0,
+        "_gradientColor1": {
+          "r": 0.9843137264251709,
+          "g": 0.6313725709915161,
+          "b": 0.10588235408067703,
+          "a": 1
+        },
+        "_gradientColor2": {
+          "r": 0.9416666626930237,
+          "g": 0.1098611131310463,
+          "b": 0.1098611131310463,
+          "a": 1
+        },
+        "_gradientColor3": {
+          "r": 1,
+          "g": 1,
+          "b": 1,
+          "a": 1
+        },
+        "_gradientColorPos1": 0,
+        "_gradientColorPos2": 1,
+        "_gradientColorPos3": 0.5
+      }
+    ],
+    "innerShadowLayers": [],
+    "fillTextureGuid": "",
+    "outlineTextureGuids": [],
+    "shadowTextureGuids": [],
+    "shadowOutlineTextureGuids": [],
+    "innerShadowTextureGuids": [],
+    "objGuid": "",
+    "references": []
+  }
+]

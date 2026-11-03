@@ -1,0 +1,28 @@
+{
+  "intention": "Hide the gameplay and result layers in the saved scene so the project opens on the calibration screen with no first-frame flash; the GameManager script re-enables them at runtime.",
+  "commands": [
+    { "commandType": "set_object", "params": { "guid": "s19", "properties": { "visible": false } } },
+    { "commandType": "set_object", "params": { "guid": "s20", "properties": { "visible": false } } },
+    { "commandType": "set_object", "params": { "guid": "s21", "properties": { "visible": false } } },
+    { "commandType": "set_object", "params": { "guid": "s22", "properties": { "visible": false } } },
+    { "commandType": "set_object", "params": { "guid": "s23", "properties": { "visible": false } } },
+    { "commandType": "set_object", "params": { "guid": "s24", "properties": { "visible": false } } },
+    { "commandType": "set_object", "params": { "guid": "s25", "properties": { "visible": false } } },
+    { "commandType": "set_object", "params": { "guid": "s26", "properties": { "visible": false } } },
+    { "commandType": "set_object", "params": { "guid": "s27", "properties": { "visible": false } } },
+    { "commandType": "set_object", "params": { "guid": "s28", "properties": { "visible": false } } },
+    { "commandType": "set_object", "params": { "guid": "s29", "properties": { "visible": false } } },
+    { "commandType": "set_object", "params": { "guid": "s30", "properties": { "visible": false } } },
+    { "commandType": "set_object", "params": { "guid": "s31", "properties": { "visible": false } } },
+    { "commandType": "set_object", "params": { "guid": "s32", "properties": { "visible": false } } },
+    { "commandType": "set_object", "params": { "guid": "s33", "properties": { "visible": false } } },
+    { "commandType": "set_object", "params": { "guid": "s34", "properties": { "visible": false } } },
+    { "commandType": "set_object", "params": { "guid": "s35", "properties": { "visible": false } } },
+    { "commandType": "set_object", "params": { "guid": "s36", "properties": { "visible": false } } },
+    { "commandType": "set_object", "params": { "guid": "s37", "properties": { "visible": false } } },
+    { "commandType": "set_object", "params": { "guid": "s38", "properties": { "visible": false } } },
+    { "commandType": "set_object", "params": { "guid": "s39", "properties": { "visible": false } } },
+    { "commandType": "set_object", "params": { "guid": "s40", "properties": { "visible": false } } },
+    { "commandType": "set_object", "params": { "guid": "s41", "properties": { "visible": false } } }
+  ]
+}

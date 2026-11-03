@@ -1,0 +1,1154 @@
+{
+  "version": 1,
+  "annotations": {
+    "56883aa7-7f1c-99fc-5e18-e2d24b120384": {
+      "description": "Display-weight digits with soft rounded corners. Fill is a vertical gradient from white through bright orange to deep red. No outline. A warm orange-red glow halo sits behind the digits. A subtle highlight at the top of each glyph reads as a soft 3D form.",
+      "source": "library",
+      "visualConfirmed": true,
+      "metadata": {
+        "sourceType": "game_asset_catalog",
+        "assetId": "67",
+        "path": "art_text/67.oart",
+        "category": "art_text",
+        "tags": [
+          "art_text",
+          "score",
+          "countdown",
+          "counter",
+          "digits",
+          "gradient",
+          "warm",
+          "orange",
+          "red",
+          "fire",
+          "energetic",
+          "hot-streak",
+          "3d",
+          "chunky"
+        ],
+        "format": "OART",
+        "license": "Internal"
+      },
+      "stale": false,
+      "updated": "2026-10-22T00:16:46.234Z"
+    },
+    "858c832f-d19c-8f2a-f24e-2d080e583e2d": {
+      "description": "Blocky bold uppercase display face. Fill is a vertical gradient from yellow through orange to red. Two concentric outlines: a deep navy inner outline, then a silver/light chrome outer outline. Slight drop shadow underneath.",
+      "source": "library",
+      "visualConfirmed": true,
+      "metadata": {
+        "sourceType": "game_asset_catalog",
+        "assetId": "vi_arcade",
+        "path": "art_text/vi_arcade.oart",
+        "category": "art_text",
+        "tags": [
+          "art_text",
+          "arcade",
+          "retro",
+          "8bit",
+          "pixel",
+          "game-over",
+          "title",
+          "start-screen",
+          "level-complete",
+          "orange",
+          "chrome",
+          "vintage",
+          "classic",
+          "game"
+        ],
+        "format": "OART",
+        "license": "Internal"
+      },
+      "stale": false,
+      "updated": "2026-10-22T00:16:46.899Z"
+    },
+    "62815871-b29d-1a7c-a4bd-d904e82284b6": {
+      "description": "Smooth 25s background music loop with an upbeat, swinging feel suitable for casual/puzzle games. Designed to seamlessly loop. Use as the main background music for games — set audio player to loop mode. Source: 'Swinging Sweet' by Ville Nousiainen, OpenGameArt (CC0).",
+      "source": "library",
+      "visualConfirmed": true,
+      "metadata": {
+        "sourceType": "game_asset_catalog",
+        "assetId": "bgm_loop",
+        "path": "sounds/bgm_loop.mp3",
+        "category": "sounds",
+        "tags": [
+          "bgm",
+          "music",
+          "loop",
+          "background",
+          "casual",
+          "game",
+          "audio"
+        ],
+        "format": "MP3",
+        "license": "CC0"
+      },
+      "stale": false,
+      "updated": "2026-10-22T00:16:47.391Z"
+    },
+    "d5a1cefe-fdf8-b184-39b2-df07718f55bd": {
+      "description": "Crisp 0.1s click sound effect, ideal for button tap feedback, menu item selection, or any UI interaction that needs an audible response. Source: Kenney Interface Sounds (CC0). Very short duration makes it suitable for rapid repeated taps without overlap issues.",
+      "source": "library",
+      "visualConfirmed": true,
+      "metadata": {
+        "sourceType": "game_asset_catalog",
+        "assetId": "sfx_click",
+        "path": "sounds/sfx_click.mp3",
+        "category": "sounds",
+        "tags": [
+          "click",
+          "tap",
+          "button",
+          "ui",
+          "sfx",
+          "game",
+          "audio"
+        ],
+        "format": "MP3",
+        "license": "CC0"
+      },
+      "stale": false,
+      "updated": "2026-10-22T00:16:47.911Z"
+    },
+    "51f3baf5-8bce-47c4-d52c-ee7387bec302": {
+      "description": "Light 0.2s pop/pluck sound effect with a bubbly character. Great for collecting items, popping bubbles, spawning objects, or any playful game interaction. Source: Kenney Interface Sounds (CC0).",
+      "source": "library",
+      "visualConfirmed": true,
+      "metadata": {
+        "sourceType": "game_asset_catalog",
+        "assetId": "sfx_pop",
+        "path": "sounds/sfx_pop.mp3",
+        "category": "sounds",
+        "tags": [
+          "pop",
+          "bubble",
+          "pluck",
+          "collect",
+          "sfx",
+          "game",
+          "audio"
+        ],
+        "format": "MP3",
+        "license": "CC0"
+      },
+      "stale": false,
+      "updated": "2026-10-22T00:16:48.626Z"
+    },
+    "6854d729-114b-f38b-a7de-db8dfec1adde": {
+      "description": "Pleasant 0.5s ascending confirmation tone conveying success/positive outcome. Use for correct answer feedback, level completion, achievement unlocked, or any positive game event. Source: Kenney Interface Sounds (CC0).",
+      "source": "library",
+      "visualConfirmed": true,
+      "metadata": {
+        "sourceType": "game_asset_catalog",
+        "assetId": "sfx_success",
+        "path": "sounds/sfx_success.mp3",
+        "category": "sounds",
+        "tags": [
+          "success",
+          "win",
+          "correct",
+          "confirm",
+          "positive",
+          "sfx",
+          "game",
+          "audio"
+        ],
+        "format": "MP3",
+        "license": "CC0"
+      },
+      "stale": false,
+      "updated": "2026-10-22T00:16:49.486Z"
+    },
+    "8071effd-b123-509d-55bd-4fe45d996861": {
+      "description": "Descending 0.5s error tone conveying failure/negative outcome. Use for wrong answer feedback, game over, life lost, time expired, or any negative game event. Source: Kenney Interface Sounds (CC0).",
+      "source": "library",
+      "visualConfirmed": true,
+      "metadata": {
+        "sourceType": "game_asset_catalog",
+        "assetId": "sfx_fail",
+        "path": "sounds/sfx_fail.mp3",
+        "category": "sounds",
+        "tags": [
+          "fail",
+          "error",
+          "wrong",
+          "lose",
+          "negative",
+          "sfx",
+          "game",
+          "audio"
+        ],
+        "format": "MP3",
+        "license": "CC0"
+      },
+      "stale": false,
+      "updated": "2026-10-22T00:18:31.331Z"
+    },
+    "b88bfee5-a05f-5632-3a5f-84adde5be42b": {
+      "description": "Red cartoon santa hat with white fur band and pompom, transparent background, normal +1 item",
+      "userDescription": "Red cartoon santa hat with white fur band and pompom, transparent background, normal +1 item",
+      "source": "user",
+      "visualConfirmed": true,
+      "stale": false,
+      "updated": "2026-10-22T00:18:31.356Z"
+    },
+    "fd868728-a6a5-8ac2-4bbd-e68a7e00882f": {
+      "description": "Golden santa hat with cream fur and sparkles, transparent background, bonus +3 item",
+      "userDescription": "Golden santa hat with cream fur and sparkles, transparent background, bonus +3 item",
+      "source": "user",
+      "visualConfirmed": true,
+      "stale": false,
+      "updated": "2026-10-22T00:18:31.379Z"
+    },
+    "15604a8c-a204-9618-fa10-d6886392a11d": {
+      "description": "Green angry monster holding a lump of coal, transparent background, bad -2 item",
+      "userDescription": "Green angry monster holding a lump of coal, transparent background, bad -2 item",
+      "source": "user",
+      "visualConfirmed": true,
+      "stale": false,
+      "updated": "2026-10-22T00:18:31.399Z"
+    },
+    "dd3bfa50-6580-c9c3-23a7-7104edefe9b4": {
+      "description": "Golden glowing ring with sparkles, transparent background, forehead catcher indicator",
+      "userDescription": "Golden glowing ring with sparkles, transparent background, forehead catcher indicator",
+      "source": "user",
+      "visualConfirmed": true,
+      "stale": false,
+      "updated": "2026-10-22T00:18:31.417Z"
+    },
+    "0347edd4-16a0-1acf-403b-e9e932b867d7": {
+      "description": "Soft white six point snowflake, transparent background, snow particle",
+      "userDescription": "Soft white six point snowflake, transparent background, snow particle",
+      "source": "user",
+      "visualConfirmed": true,
+      "stale": false,
+      "updated": "2026-10-22T00:18:31.441Z"
+    },
+    "244ef00e-8e5c-781f-e0ab-97b0f91e629d": {
+      "description": "Golden radial star burst with sparkles, transparent background, catch impact VFX",
+      "userDescription": "Golden radial star burst with sparkles, transparent background, catch impact VFX",
+      "source": "user",
+      "visualConfirmed": true,
+      "stale": false,
+      "updated": "2026-10-22T00:18:31.461Z"
+    },
+    "9838bc0c-4807-14f4-82a0-6c072bb03f8d": {
+      "description": "Dark red rounded pill plate with gold border, HUD backing plate",
+      "userDescription": "Dark red rounded pill plate with gold border, HUD backing plate",
+      "source": "user",
+      "visualConfirmed": true,
+      "stale": false,
+      "updated": "2026-10-22T00:18:31.478Z"
+    },
+    "df3492b9-0458-9b2c-30bc-8ac9707312a4": {
+      "description": "Translucent dark red rounded card with gold border and snowflakes, result panel",
+      "userDescription": "Translucent dark red rounded card with gold border and snowflakes, result panel",
+      "source": "user",
+      "visualConfirmed": true,
+      "stale": false,
+      "updated": "2026-10-22T00:18:31.496Z"
+    },
+    "a5daadfb-6f52-f7f2-af5e-28ae3fcd5c95": {
+      "description": "Bright red rounded button plate with gold rim, retry button",
+      "userDescription": "Bright red rounded button plate with gold rim, retry button",
+      "source": "user",
+      "visualConfirmed": true,
+      "stale": false,
+      "updated": "2026-10-22T00:18:31.516Z"
+    },
+    "80bba273-b53e-1d08-9234-eb95dd1009e3": {
+      "description": "Golden five point star with dark outline, miss life icon",
+      "userDescription": "Golden five point star with dark outline, miss life icon",
+      "source": "user",
+      "visualConfirmed": true,
+      "stale": false,
+      "updated": "2026-10-22T00:18:31.535Z"
+    },
+    "7a5a035d-28a4-3935-9b0c-3de4d0b26e9d": {
+      "description": "Plain white texture used for tinted solid color UI fills",
+      "userDescription": "Plain white texture used for tinted solid color UI fills",
+      "source": "user",
+      "visualConfirmed": true,
+      "stale": false,
+      "updated": "2026-10-22T00:18:31.558Z"
+    }
+  },
+  "shortIdMap": {
+    "mappings": [
+      {
+        "guid": "602a125f-adef-400a-1092-0fec2f5a3f83",
+        "shortId": "r1",
+        "type": "resource"
+      },
+      {
+        "guid": "9baa39a1-99dd-68c7-f365-ef9fb4e1cf1c",
+        "shortId": "s1",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "131eee15-64bf-4bea-a12e-b1016d0e5d2a",
+        "shortId": "c1",
+        "type": "component"
+      },
+      {
+        "guid": "8f8f8437-a9a9-74f5-a884-8d54dcd4d0d9",
+        "shortId": "c2",
+        "type": "component"
+      },
+      {
+        "guid": "b88bfee5-a05f-5632-3a5f-84adde5be42b",
+        "shortId": "r2",
+        "type": "resource"
+      },
+      {
+        "guid": "fd868728-a6a5-8ac2-4bbd-e68a7e00882f",
+        "shortId": "r3",
+        "type": "resource"
+      },
+      {
+        "guid": "15604a8c-a204-9618-fa10-d6886392a11d",
+        "shortId": "r4",
+        "type": "resource"
+      },
+      {
+        "guid": "dd3bfa50-6580-c9c3-23a7-7104edefe9b4",
+        "shortId": "r5",
+        "type": "resource"
+      },
+      {
+        "guid": "0347edd4-16a0-1acf-403b-e9e932b867d7",
+        "shortId": "r6",
+        "type": "resource"
+      },
+      {
+        "guid": "244ef00e-8e5c-781f-e0ab-97b0f91e629d",
+        "shortId": "r7",
+        "type": "resource"
+      },
+      {
+        "guid": "9838bc0c-4807-14f4-82a0-6c072bb03f8d",
+        "shortId": "r8",
+        "type": "resource"
+      },
+      {
+        "guid": "df3492b9-0458-9b2c-30bc-8ac9707312a4",
+        "shortId": "r9",
+        "type": "resource"
+      },
+      {
+        "guid": "a5daadfb-6f52-f7f2-af5e-28ae3fcd5c95",
+        "shortId": "r10",
+        "type": "resource"
+      },
+      {
+        "guid": "80bba273-b53e-1d08-9234-eb95dd1009e3",
+        "shortId": "r11",
+        "type": "resource"
+      },
+      {
+        "guid": "7a5a035d-28a4-3935-9b0c-3de4d0b26e9d",
+        "shortId": "r12",
+        "type": "resource"
+      },
+      {
+        "guid": "56883aa7-7f1c-99fc-5e18-e2d24b120384",
+        "shortId": "r13",
+        "type": "resource"
+      },
+      {
+        "guid": "858c832f-d19c-8f2a-f24e-2d080e583e2d",
+        "shortId": "r14",
+        "type": "resource"
+      },
+      {
+        "guid": "62815871-b29d-1a7c-a4bd-d904e82284b6",
+        "shortId": "r15",
+        "type": "resource"
+      },
+      {
+        "guid": "d5a1cefe-fdf8-b184-39b2-df07718f55bd",
+        "shortId": "r16",
+        "type": "resource"
+      },
+      {
+        "guid": "51f3baf5-8bce-47c4-d52c-ee7387bec302",
+        "shortId": "r17",
+        "type": "resource"
+      },
+      {
+        "guid": "6854d729-114b-f38b-a7de-db8dfec1adde",
+        "shortId": "r18",
+        "type": "resource"
+      },
+      {
+        "guid": "8071effd-b123-509d-55bd-4fe45d996861",
+        "shortId": "r19",
+        "type": "resource"
+      },
+      {
+        "guid": "1996fbe3-a1b5-a55d-22f8-b3d7b4dfacd1",
+        "shortId": "s2",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "fc96b25b-af85-0e7a-a1bd-0d5e521ded8f",
+        "shortId": "c3",
+        "type": "component"
+      },
+      {
+        "guid": "a2b0128f-b226-84b8-6d94-be70f0b18491",
+        "shortId": "c4",
+        "type": "component"
+      },
+      {
+        "guid": "c1857d1b-0995-8a43-3544-80a1ebfaad59",
+        "shortId": "s3",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "71a83ef4-b7a1-3fcc-d15b-b6ea3bc9f3e1",
+        "shortId": "c5",
+        "type": "component"
+      },
+      {
+        "guid": "87d9e087-f0a3-1d82-a21f-c3d81426ed4a",
+        "shortId": "c6",
+        "type": "component"
+      },
+      {
+        "guid": "00000000-0000-0000-0000-0000000000c0",
+        "shortId": "r20",
+        "type": "resource"
+      },
+      {
+        "guid": "12d2c367-00bd-cb71-7821-e440478f3299",
+        "shortId": "r21",
+        "type": "resource"
+      },
+      {
+        "guid": "7a59559b-a795-d872-ef00-98f2afe59174",
+        "shortId": "r22",
+        "type": "resource"
+      },
+      {
+        "guid": "2e8f162d-4f0d-f45c-aacf-7338d092eb81",
+        "shortId": "r23",
+        "type": "resource"
+      },
+      {
+        "guid": "23c5e03c-36f7-de2a-dcfb-da0609ac0841",
+        "shortId": "r24",
+        "type": "resource"
+      },
+      {
+        "guid": "8335d00c-290f-6ba0-867c-c60b9c7f6f3a",
+        "shortId": "r25",
+        "type": "resource"
+      },
+      {
+        "guid": "00000000-0000-0000-0000-000000001543",
+        "shortId": "r26",
+        "type": "resource"
+      },
+      {
+        "guid": "4f5c9fb9-75ad-f3c3-038d-9f7d01b8937b",
+        "shortId": "s4",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "c9e3945c-4927-c274-c607-bdebc012e57d",
+        "shortId": "c7",
+        "type": "component"
+      },
+      {
+        "guid": "e1412c24-6ddb-a28a-8719-8d4d88a34596",
+        "shortId": "c8",
+        "type": "component"
+      },
+      {
+        "guid": "0c772f92-1d31-95cc-4a3b-eb2d006c20e6",
+        "shortId": "s5",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "ab0bd5ea-2248-f782-3acc-c627b8091c7e",
+        "shortId": "c9",
+        "type": "component"
+      },
+      {
+        "guid": "55e9d108-60b3-2993-b698-933ccdbb1243",
+        "shortId": "c10",
+        "type": "component"
+      },
+      {
+        "guid": "cde07676-b6d2-cbdd-d3c6-808d72408292",
+        "shortId": "s6",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "7ba7b488-8eb3-5572-229e-e0adcd7b715e",
+        "shortId": "c11",
+        "type": "component"
+      },
+      {
+        "guid": "151c29de-347b-9929-6110-6c38ac34bd7d",
+        "shortId": "c12",
+        "type": "component"
+      },
+      {
+        "guid": "ad0b9804-10be-326a-2050-a4f971302965",
+        "shortId": "s7",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "db2cb3e0-a0da-67e7-247d-fb469fb2bef2",
+        "shortId": "c13",
+        "type": "component"
+      },
+      {
+        "guid": "5db59883-7a04-b9c9-d8a8-f754ebbb0834",
+        "shortId": "s8",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "43cb103c-964e-a956-10b2-a66939674244",
+        "shortId": "c14",
+        "type": "component"
+      },
+      {
+        "guid": "869fc846-0b38-d5b0-d6a3-4502e6ffd216",
+        "shortId": "s9",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "464be5eb-0f2b-1490-9401-1b80e8fe7797",
+        "shortId": "c15",
+        "type": "component"
+      },
+      {
+        "guid": "df203884-ca0d-0c07-09a0-5d54f30a188d",
+        "shortId": "c16",
+        "type": "component"
+      },
+      {
+        "guid": "401cb297-5a81-6b66-7647-70c4fa85d228",
+        "shortId": "s10",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "cea276d1-e6f0-4003-a017-9fd3bd2fed4b",
+        "shortId": "c17",
+        "type": "component"
+      },
+      {
+        "guid": "5550d545-33f8-4d22-2a88-3046dbb538f8",
+        "shortId": "c18",
+        "type": "component"
+      },
+      {
+        "guid": "863fdfac-ab9c-7f11-26c4-af541acdebe3",
+        "shortId": "s11",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "6b0aea0e-1a89-2a11-cd52-0ca192c84d29",
+        "shortId": "c19",
+        "type": "component"
+      },
+      {
+        "guid": "480ffe7f-4dd1-d0b2-00d3-b89d7a1b1345",
+        "shortId": "c20",
+        "type": "component"
+      },
+      {
+        "guid": "e6a15ed6-d7b8-ab19-4be9-d0c014647d6d",
+        "shortId": "s12",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "8444ae69-2584-5107-a7ad-cf64fcbf288b",
+        "shortId": "c21",
+        "type": "component"
+      },
+      {
+        "guid": "7edb2cfa-732f-3e0b-9f46-78f3f75d4571",
+        "shortId": "c22",
+        "type": "component"
+      },
+      {
+        "guid": "469a9602-57ba-0939-2c5a-56fb0dbfa437",
+        "shortId": "s13",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "e4387dbd-1d74-7a12-ba96-34bfedf40d2b",
+        "shortId": "c23",
+        "type": "component"
+      },
+      {
+        "guid": "0c8077bd-d955-8dcc-0351-338c00244ad0",
+        "shortId": "c24",
+        "type": "component"
+      },
+      {
+        "guid": "b5fe0afd-1be4-e1e9-2d0a-94ace5ab8082",
+        "shortId": "s14",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "7400d3ea-1075-284d-ffcb-89612aa32e66",
+        "shortId": "c25",
+        "type": "component"
+      },
+      {
+        "guid": "b176448b-29e7-93ea-77f5-ab50e72933df",
+        "shortId": "c26",
+        "type": "component"
+      },
+      {
+        "guid": "7a9c381f-78bc-17a8-05e6-496149bde6e4",
+        "shortId": "s15",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "c89a80f3-b7dd-0ae5-93c2-ecceec2b1b00",
+        "shortId": "c27",
+        "type": "component"
+      },
+      {
+        "guid": "6f62cc07-f3d9-ae55-410a-d215bfe1597c",
+        "shortId": "c28",
+        "type": "component"
+      },
+      {
+        "guid": "7695db2a-a29c-3b90-855b-e393e5f68562",
+        "shortId": "s16",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "5dc081b5-f5c7-6979-f003-931751666851",
+        "shortId": "c29",
+        "type": "component"
+      },
+      {
+        "guid": "33d168be-37df-28df-fdd4-c84a7b7f39b2",
+        "shortId": "c30",
+        "type": "component"
+      },
+      {
+        "guid": "866e01c6-7907-7dc8-a807-dcd870a7b10f",
+        "shortId": "s17",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "a5d5639b-323a-f4f1-2f4f-fd1ed447fc5f",
+        "shortId": "c31",
+        "type": "component"
+      },
+      {
+        "guid": "e10a71cd-a9eb-6a12-71e2-86d510ea4e72",
+        "shortId": "c32",
+        "type": "component"
+      },
+      {
+        "guid": "7d53c2b8-386e-1d70-8552-54047a60317f",
+        "shortId": "s18",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "5b1be17f-e919-31d5-53cc-5ad88ab37389",
+        "shortId": "c33",
+        "type": "component"
+      },
+      {
+        "guid": "cf40a86c-73e4-374e-fb9f-de9991a9be90",
+        "shortId": "c34",
+        "type": "component"
+      },
+      {
+        "guid": "22a0b436-fb03-d1e8-44f9-73cb5212780a",
+        "shortId": "s19",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "795dbf83-2955-d097-cbd5-ddcd8a223ce8",
+        "shortId": "c35",
+        "type": "component"
+      },
+      {
+        "guid": "787df66f-e9a8-5099-a5ab-4c13bec2c0cc",
+        "shortId": "c36",
+        "type": "component"
+      },
+      {
+        "guid": "10ccffa9-2e00-6c39-0ea5-c1cbea96b927",
+        "shortId": "s20",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "c14f0b16-d919-2403-1296-d7a75892003d",
+        "shortId": "c37",
+        "type": "component"
+      },
+      {
+        "guid": "f1800df3-fb34-6ab0-46c1-c4e8eacdfc67",
+        "shortId": "c38",
+        "type": "component"
+      },
+      {
+        "guid": "aa5884db-ad4e-9c57-39de-763293fc9921",
+        "shortId": "s21",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "c624f0f1-9c0b-b9f3-a487-e217577b2b98",
+        "shortId": "c39",
+        "type": "component"
+      },
+      {
+        "guid": "646ae975-b6f9-b8f5-ec7b-02fda1886bc8",
+        "shortId": "c40",
+        "type": "component"
+      },
+      {
+        "guid": "5bb026f4-9ad7-e092-9d4c-3686b9d90dbc",
+        "shortId": "s22",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "99787b58-e7bd-5fbc-584b-b8547e1e62ab",
+        "shortId": "c41",
+        "type": "component"
+      },
+      {
+        "guid": "8061314e-64d9-b4f9-74d7-7aea399852fe",
+        "shortId": "c42",
+        "type": "component"
+      },
+      {
+        "guid": "a0a59636-3222-437c-18c0-be4e1ec3a9f1",
+        "shortId": "s23",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "cb340bbd-ea97-17c9-dba5-479eb76d00a0",
+        "shortId": "c43",
+        "type": "component"
+      },
+      {
+        "guid": "c3724a90-6dc8-367b-c937-aaa32a4c2631",
+        "shortId": "c44",
+        "type": "component"
+      },
+      {
+        "guid": "93e036d6-df36-a71a-e072-7c3298ce1c90",
+        "shortId": "s24",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "3786d083-6d65-1281-cba7-a0e049db3454",
+        "shortId": "c45",
+        "type": "component"
+      },
+      {
+        "guid": "555ad6fc-b335-280d-eb54-920d154ea80b",
+        "shortId": "c46",
+        "type": "component"
+      },
+      {
+        "guid": "198bd974-727c-4a3e-0418-ac69936b4ac7",
+        "shortId": "s25",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "6ee877ba-0e48-466e-73c5-36a13f505281",
+        "shortId": "c47",
+        "type": "component"
+      },
+      {
+        "guid": "c28bbe07-b1c6-436b-9e18-f0a190fa73e1",
+        "shortId": "c48",
+        "type": "component"
+      },
+      {
+        "guid": "0caaadd7-014b-8a04-59cc-bddef95b39f1",
+        "shortId": "s26",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "6e5e6a31-b169-f8ec-6b81-abc2d60bc00e",
+        "shortId": "c49",
+        "type": "component"
+      },
+      {
+        "guid": "b6dcc081-bf7f-a90b-78a4-6b4f3167b02b",
+        "shortId": "c50",
+        "type": "component"
+      },
+      {
+        "guid": "146fdf5e-0e98-0243-67e8-7007393264d5",
+        "shortId": "s27",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "611d7d5d-69a5-6d62-510f-4adcf14690ff",
+        "shortId": "c51",
+        "type": "component"
+      },
+      {
+        "guid": "ec21ec9d-6ab9-a5d4-177b-61bdc4c71c37",
+        "shortId": "c52",
+        "type": "component"
+      },
+      {
+        "guid": "ab574b3a-fb38-03ac-e13f-df4ba5c79eaa",
+        "shortId": "s28",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "9b722833-900f-7a5c-2952-93a6054b6452",
+        "shortId": "c53",
+        "type": "component"
+      },
+      {
+        "guid": "2dbe5c5b-9d88-75b2-ee12-69bac14a071a",
+        "shortId": "c54",
+        "type": "component"
+      },
+      {
+        "guid": "572e5548-9087-4e26-00e5-2f684ee4194e",
+        "shortId": "s29",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "ea0726e6-d286-06bc-ed74-2e4744dbd9c0",
+        "shortId": "c55",
+        "type": "component"
+      },
+      {
+        "guid": "13613a76-8071-4c0d-8483-647c605e39d8",
+        "shortId": "c56",
+        "type": "component"
+      },
+      {
+        "guid": "5132745f-8135-a2d4-3ead-a337732becd4",
+        "shortId": "s30",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "9935228e-7c72-5ae1-2bd1-d8cf13da26ed",
+        "shortId": "c57",
+        "type": "component"
+      },
+      {
+        "guid": "1c74a9d4-fb4e-723d-e3e0-c2243fd70bca",
+        "shortId": "c58",
+        "type": "component"
+      },
+      {
+        "guid": "292f7b1b-838b-fd95-8629-f7d67f49069a",
+        "shortId": "s31",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "6db737b8-87af-ca1b-71d8-49de5a27b79a",
+        "shortId": "c59",
+        "type": "component"
+      },
+      {
+        "guid": "3fcd78dd-941e-a082-d8e0-6e1497fa727a",
+        "shortId": "c60",
+        "type": "component"
+      },
+      {
+        "guid": "29699298-fd36-ff72-d9b3-92c9e5d88053",
+        "shortId": "s32",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "a28e0253-8ece-9fb6-e051-76039ec9a550",
+        "shortId": "c61",
+        "type": "component"
+      },
+      {
+        "guid": "7a7f3bcc-67b9-def1-a9a0-64b189686901",
+        "shortId": "c62",
+        "type": "component"
+      },
+      {
+        "guid": "a55fdf43-ca47-e2c3-c3ef-d239b2c5ffc5",
+        "shortId": "s33",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "5553e231-3fee-2dfb-746c-3967bcc39701",
+        "shortId": "c63",
+        "type": "component"
+      },
+      {
+        "guid": "4b7dff93-f2b9-656b-948b-19a9edc621f9",
+        "shortId": "c64",
+        "type": "component"
+      },
+      {
+        "guid": "6a559112-0b39-addb-2467-50de6ef56daf",
+        "shortId": "s34",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "40abfa67-91a0-bd28-6b0f-964ad8ceb841",
+        "shortId": "c65",
+        "type": "component"
+      },
+      {
+        "guid": "7f38d6a9-b7fb-bdbc-d7d5-6d07b7adbfa9",
+        "shortId": "c66",
+        "type": "component"
+      },
+      {
+        "guid": "4c6a3bc3-f241-47e0-a002-25ab0afaa8fd",
+        "shortId": "s35",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "2cba9421-a3f8-a5ea-3d9d-6a49affea1b8",
+        "shortId": "c67",
+        "type": "component"
+      },
+      {
+        "guid": "0ae0600c-34a4-71ae-b699-46b183282dd3",
+        "shortId": "c68",
+        "type": "component"
+      },
+      {
+        "guid": "f8b0a79c-b4be-1c36-8388-cd6e69d3ebbe",
+        "shortId": "s36",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "2c01ae98-2f39-e5a8-5ccd-efa31afac9ac",
+        "shortId": "c69",
+        "type": "component"
+      },
+      {
+        "guid": "ac4bdd00-9ef9-44bb-c780-7fd209828763",
+        "shortId": "c70",
+        "type": "component"
+      },
+      {
+        "guid": "b4b0fcd6-c674-92a7-0450-e4b4544b5f0a",
+        "shortId": "s37",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "0908a953-c408-0308-d5fe-0e40314db41b",
+        "shortId": "c71",
+        "type": "component"
+      },
+      {
+        "guid": "5031f6b0-b24e-464a-03e5-7112caa9e707",
+        "shortId": "c72",
+        "type": "component"
+      },
+      {
+        "guid": "c106b4b2-ca96-36f3-bb45-064e81ba6b16",
+        "shortId": "s38",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "813f7d73-09f4-9a1c-326f-ff71ad6504d8",
+        "shortId": "c73",
+        "type": "component"
+      },
+      {
+        "guid": "bb3ce5c8-2118-ed8f-3f51-5fd4ac094e0d",
+        "shortId": "c74",
+        "type": "component"
+      },
+      {
+        "guid": "4a9e83f4-0ece-da11-7fcb-78f4f8dd5671",
+        "shortId": "s39",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "c0f3bd9a-bbca-442d-4fa5-9dc1c4cdb4e1",
+        "shortId": "c75",
+        "type": "component"
+      },
+      {
+        "guid": "cff7d200-4d58-4de3-3fc4-c26c68dbffbb",
+        "shortId": "c76",
+        "type": "component"
+      },
+      {
+        "guid": "fe75f9d5-5da5-3e44-28f9-8c32a6ada08a",
+        "shortId": "s40",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "1f4fa058-b5f3-32d5-a24d-b2c215573301",
+        "shortId": "c77",
+        "type": "component"
+      },
+      {
+        "guid": "7e2da112-ba59-2c06-1bdf-abde9103c8c9",
+        "shortId": "c78",
+        "type": "component"
+      },
+      {
+        "guid": "7159bf49-0980-70b2-ce0e-8e22290dce03",
+        "shortId": "s41",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "67cf0187-07ae-a1d6-4d92-6133f1bb17a6",
+        "shortId": "c79",
+        "type": "component"
+      },
+      {
+        "guid": "fc1868b2-5de2-56a0-ae27-1d640cca1368",
+        "shortId": "c80",
+        "type": "component"
+      },
+      {
+        "guid": "5fba6bf4-5786-4e69-c0aa-58dcb3c5afa7",
+        "shortId": "s42",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "534cef32-b1c3-970b-d8cd-bcff9819de68",
+        "shortId": "c81",
+        "type": "component"
+      },
+      {
+        "guid": "ce275aec-211b-d40f-a6ba-17dd1a0ce836",
+        "shortId": "c82",
+        "type": "component"
+      },
+      {
+        "guid": "1fee4217-bfd6-132f-d761-e0f3cbefd991",
+        "shortId": "s43",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "51c7541d-3dae-145b-0582-8fcdf51281d5",
+        "shortId": "c83",
+        "type": "component"
+      },
+      {
+        "guid": "789e45eb-3f71-e3f4-b936-12de56e6cfa5",
+        "shortId": "c84",
+        "type": "component"
+      },
+      {
+        "guid": "48c10918-58e6-7a07-1b21-b83b8a6e05eb",
+        "shortId": "s44",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "a1876462-10e8-26f2-9367-a7fecdcf1c7d",
+        "shortId": "c85",
+        "type": "component"
+      },
+      {
+        "guid": "699280e3-9144-cfde-c5b1-338ad6ebc912",
+        "shortId": "c86",
+        "type": "component"
+      },
+      {
+        "guid": "ee375144-1825-366a-a904-c92ca7038832",
+        "shortId": "s45",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "3dbaac62-c555-ae24-0c32-7229cdd2bac3",
+        "shortId": "c87",
+        "type": "component"
+      },
+      {
+        "guid": "6be40cb4-6f07-d0cf-0f69-6187369dca85",
+        "shortId": "c88",
+        "type": "component"
+      },
+      {
+        "guid": "f4f1cf06-d327-9800-f95e-cfd1089cf556",
+        "shortId": "s46",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "f1e03bc6-ed82-bf73-fd53-385d086a9958",
+        "shortId": "c89",
+        "type": "component"
+      },
+      {
+        "guid": "5c6589da-2a1b-62af-0d37-41ae850f7c26",
+        "shortId": "c90",
+        "type": "component"
+      },
+      {
+        "guid": "00000000-0000-0000-0000-000000000080",
+        "shortId": "r27",
+        "type": "resource"
+      },
+      {
+        "guid": "dcfecab6-f8d6-71a4-f0ac-1fe849593680",
+        "shortId": "r28",
+        "type": "resource"
+      },
+      {
+        "guid": "840ff43c-c783-3b67-2692-c997fbde226f",
+        "shortId": "r29",
+        "type": "resource"
+      },
+      {
+        "guid": "a588ad17-41e1-d747-72ed-1b7d75032d89",
+        "shortId": "r30",
+        "type": "resource"
+      },
+      {
+        "guid": "d6c3a08f-4bf2-3140-1393-4c7ed91151f0",
+        "shortId": "s47",
+        "type": "sceneObject"
+      },
+      {
+        "guid": "5c03b9d3-d408-05f3-2842-c93337bf6714",
+        "shortId": "c91",
+        "type": "component"
+      },
+      {
+        "guid": "dabbefb1-9fc8-d60d-62dc-a8f8845742e5",
+        "shortId": "c92",
+        "type": "component"
+      },
+      {
+        "guid": "00000000-0000-0000-0000-000000000132",
+        "shortId": "r31",
+        "type": "resource"
+      }
+    ],
+    "counters": {
+      "sceneObject": 47,
+      "component": 92,
+      "resource": 31
+    }
+  },
+  "handoff": {
+    "autoBrief": {
+      "summary": "Auto-baseline at save: 44 object(s) in 2 render group(s); scripts: GameManager; resources: 23 (16 Texture2D, 5 AudioAsset, 2 ArtTextAsset).",
+      "updatedAt": "2026-10-22T01:49:50.131Z"
+    },
+    "plan": "scene_representation:\n  planning_mode: explicit\n  decision_summary: Live camera feed stays full-screen as the backdrop (composition none). Gameplay is\n    a screen-space 2D layer at 720x1280 with falling hat items and edge HUD. A Head Tracker rig\n    supplies a forehead anchor whose world position is projected to screen pixels each frame, so the\n    catcher collider follows the user's real forehead without moving the camera feed.\n  space:\n    kind: screen\n    description: 720x1280 screen space for all gameplay items and HUD, layered directly over the camera feed.\n  content_form:\n    kind: flat_2d\n    description: Flat 2D sprites, art text and a soft radial forehead ring, plus 3D camera and head\n      tracker rig underneath.\n  requirements:\n    - id: capture.head_follows_forehead\n      description: The catcher hit point tracks the user's real forehead position every frame and mirrors\n        head movement horizontally and vertically.\n      must: true\n      layer_refs:\n        - layer.head_rig\n        - layer.gameplay_2d\n      verification_refs:\n        - verify.head_tracking\n    - id: capture.feed_always_visible\n      description: The live camera feed stays visible and unobstructed in the center of the screen during\n        calibration, gameplay and result.\n      must: true\n      layer_refs:\n        - layer.camera_feed\n      verification_refs:\n        - verify.feed_visibility\n    - id: feedback.immediate_hit_readout\n      description: Every caught or missed item produces immediate visible feedback (pop burst, score\n        number, red flash and shake) and a matching sound.\n      must: true\n      layer_refs:\n        - layer.gameplay_2d\n        - layer.hud\n      verification_refs:\n        - verify.hit_feedback\n    - id: hud.safe_zone_layout\n      description: All HUD text and the retry button stay inside the TikTok safe zone so nothing is\n        clipped by the TikTok UI.\n      must: false\n      layer_refs:\n        - layer.hud\n      verification_refs:\n        - verify.safe_zone\n  layers:\n    - id: layer.head_rig\n      role: head tracking rig\n      description: Main Camera plus Head Tracker; an Empty child at forehead height supplies the\n        world-space anchor that is projected to screen pixels.\n      space:\n        kind: world\n        description: 3D camera space driven by head tracking\n      content_form:\n        kind: volumetric_3d\n        description: Tracking anchor transform only, no visible mesh\n      requirement_refs:\n        - capture.head_follows_forehead\n    - id: layer.gameplay_2d\n      role: falling items and catcher ring\n      description: 2D Camera canvas holding the forehead ring, pooled falling hat items, gold gifts and\n        bad bombs that spawn at the top and fall to the bottom.\n      space:\n        kind: screen\n        description: Screen-space 2D canvas\n      content_form:\n        kind: flat_2d\n        description: Flat sprite quads positioned by script\n      requirement_refs:\n        - capture.head_follows_forehead\n        - feedback.immediate_hit_readout\n    - id: layer.hud\n      role: HUD, screens and result card\n      description: Score, miss icons, timer bar, countdown art text, calibration prompt and the\n        translucent result card with retry button, all anchored to safe-zone edges.\n      space:\n        kind: screen\n        description: Screen-space 2D canvas\n      content_form:\n        kind: flat_2d\n        description: Flat art text, labels and translucent panels\n      requirement_refs:\n        - hud.safe_zone_layout\n        - feedback.immediate_hit_readout\n    - id: layer.camera_feed\n      role: live camera background\n      description: Full-screen camera feed rendered behind every 2D layer, never covered by an opaque panel.\n      space:\n        kind: screen\n        description: Full-screen camera feed background\n      content_form:\n        kind: flat_2d\n        description: Live video texture\n      requirement_refs:\n        - capture.feed_always_visible\n  limitations:\n    - Hit detection uses distance in projected screen pixels, not true 3D depth, so an item is\n      caught when its 2D distance to the projected forehead point is small.\n    - Without a detected face the forehead anchor falls back to screen center so the game stays\n      playable in the editor preview.\n  verification:\n    - id: verify.head_tracking\n      description: Move the preview head horizontally and vertically, then compare the ring position with\n        the head tracker.\n      requirement_refs:\n        - capture.head_follows_forehead\n      views_or_states:\n        - head centered\n        - head turned left\n        - head moved up\n      success_criteria: The ring follows the forehead in the same direction with no visible lag or drift.\n    - id: verify.feed_visibility\n      description: Screenshot calibration, gameplay and result screens and confirm the face region is\n        unobstructed.\n      requirement_refs:\n        - capture.feed_always_visible\n      views_or_states:\n        - calibration screen\n        - active gameplay\n        - result screen\n      success_criteria: The center of the frame shows the live camera feed at all times with no opaque\n        full-screen panel.\n    - id: verify.hit_feedback\n      description: Trigger a normal catch, a gold catch and a bad catch and inspect the pop text, burst,\n        red flash and shake.\n      requirement_refs:\n        - feedback.immediate_hit_readout\n      views_or_states:\n        - normal catch\n        - gold catch\n        - bad catch\n        - miss\n      success_criteria: Score popup and burst appear within one frame of contact and a miss flashes red\n        with a screen shake.\n    - id: verify.safe_zone\n      description: Inspect the layout bounds of every HUD element and the retry button against the safe zone.\n      requirement_refs:\n        - hud.safe_zone_layout\n      views_or_states:\n        - gameplay HUD\n        - result card with retry button\n      success_criteria: All HUD items sit within x -340..260 and y -400..500.\n  fallbacks:\n    unknown_requirement: adapt_and_verify\n    unmet_must: stop_and_explain\ngame_type:\n  camera_feed: visible\n  ar_tracking: head\n  core_loop_seconds: 2\n  total_duration_seconds: 45\nstarter_template:\n  mode: none\n  rationale: The closest strong buildable, chef_hat_catch, steers a pot by dragging and ends on a\n    timer only. This design is head-tracked with a forehead collider, weighted item mix,\n    consecutive-miss and cumulative-miss loss, and a speed ramp, so the scaffold's drag input would\n    have to be ripped out. Built from scratch while borrowing its falling-item stream and HUD\n    framing.\nscreens:\n  - name: CalibrationScreen\n    role: intro\n    initial_visible: true\n    layout:\n      - id: el.calib_title\n        element: TitleText\n        position: top-center-safe\n        content: SANTA CAP CATCHER\n        kind: hud\n        bounds:\n          x: -170\n          y: 430\n          w: 360\n          h: 70\n      - id: el.calib_redline\n        element: RedCalibrationLine\n        position: center-horizontal line\n        size: 560x8\n        kind: decoration\n        notes: A thin red horizontal line marks the target head height for calibration.\n      - id: el.calib_arrow\n        element: CalibrationArrow\n        position: center-upper\n        size: 120x120\n        kind: decoration\n        notes: Downward chevron pointing at the red line.\n      - id: el.calib_guide\n        element: CalibrationGuideText\n        position: below-red-line\n        content: ALIGN YOUR HEAD WITH THE RED LINE\n        kind: hud\n      - id: el.calib_status\n        element: CalibrationStatusText\n        position: bottom-safe\n        content: Hold still to start\n        kind: hud\n        bounds:\n          x: -170\n          y: -400\n          w: 360\n          h: 80\n  - name: GameplayScreen\n    role: gameplay\n    initial_visible: false\n    layout:\n      - id: el.score_display\n        element: ScoreCounter\n        position: top-left-safe\n        content: SCORE 0\n        kind: hud\n        bounds:\n          x: -320\n          y: 470\n          w: 220\n          h: 70\n        notes: Score counter in the top-left HUD, borrowed from chef_hat_catch framing.\n      - id: el.miss_icons\n        element: MissIconRow\n        position: top-right-safe\n        size: 200x40\n        kind: hud\n        bounds:\n          x: 60\n          y: 460\n          w: 200\n          h: 44\n        notes: Five miss icons showing remaining lives.\n      - id: el.timer_bar\n        element: TimerBar\n        position: top-center-safe\n        size: 440x18\n        kind: hud\n        bounds:\n          x: -220\n          y: 380\n          w: 440\n          h: 18\n      - id: el.countdown_text\n        element: CountdownArtText\n        position: center\n        content: \"3\"\n        kind: hud\n        notes: Art-text countdown 3-2-1-GO; uses asset.countdown_art.\n      - id: el.forehead_ring\n        element: ForeheadCatcherRing\n        position: at-projected-forehead\n        size: 180x180\n        kind: playable\n        notes: Golden ring showing the catcher hit area; follows the forehead anchor.\n      - id: el.score_popup\n        element: ScorePopupArtText\n        position: above-forehead-ring\n        content: \"+1\"\n        kind: hud\n        notes: Art-text +1 / +3 / -2 popup; uses asset.score_art.\n      - id: el.snow_layer\n        element: SnowLayer\n        position: full-screen-behind-hud\n        kind: decoration\n        notes: Drifting snowflakes behind the HUD, never opaque.\n      - id: el.miss_flash\n        element: RedFlashOverlay\n        position: full-screen\n        opacity: 0.35\n        translucent: true\n        kind: decoration\n        notes: Red translucent flash on a miss, alpha animated from script.\n  - name: ResultScreen\n    role: result\n    initial_visible: false\n    layout:\n      - id: el.result_card\n        element: ResultCardPanel\n        position: center\n        size: 620x760\n        opacity: 0.82\n        translucent: true\n        kind: decoration\n        notes: Translucent festive card; the face stays visible around it.\n      - id: el.result_title\n        element: ResultTitleArtText\n        position: upper-center\n        content: TIME UP!\n        kind: result\n        notes: Art-text result banner; uses asset.title_art.\n      - id: el.result_score\n        element: FinalScoreArtText\n        position: center\n        content: SCORE 0\n        kind: result\n        notes: Art-text final score reveal; uses asset.score_art.\n      - id: el.result_rank\n        element: RankText\n        position: below-score\n        content: Flexible Christmas Elf\n        kind: result\n      - id: el.share_copy\n        element: ShareCopyText\n        position: lower-card\n        content: \"@ your clumsiest friend to challenge!\"\n        kind: result\n      - id: el.effect_copy\n        element: EffectCopyText\n        position: above-retry\n        content: Tap below to make a duet with this effect!\n        kind: result\n      - id: el.retry_button\n        element: RetryButton\n        position: bottom-safe\n        content: PLAY AGAIN\n        kind: button\n        interactive: true\n        bounds:\n          x: -120\n          y: -330\n          w: 240\n          h: 80\ninteractions:\n  - kind: record_start_reset\n    trigger: RecordStart event\n    response: Reset score to 0, misses to 0, consecutive misses to 0, timer to 45, speed to base, clear\n      all falling items, show CalibrationScreen and hide GameplayScreen and ResultScreen.\n    state_change: ANY -> CALIBRATION\n  - kind: gameplay_action\n    trigger: Forehead anchor held within 90 px of the red calibration line for 0.6 s\n    response: Play the countdown 3-2-1-GO on the gameplay screen, then begin spawning falling hats.\n    state_change: CALIBRATION -> COUNTDOWN -> PLAYING\n    target:\n      scope: screen_element\n      screen_element_ids:\n        - el.calib_redline\n    feedback:\n      visual: Calibration line turns green and pulses, countdown art text pops in the center\n      audio_asset_id: audio.countdown_tick\n  - kind: gameplay_action\n    trigger: Falling item overlaps the projected forehead ring point\n    response: Normal hat adds 1 point, gold gift adds 3 points and raises spawn speed, bad bomb\n      subtracts 2 points and adds one miss; the item is recycled to the pool.\n    state_change: null\n    target:\n      scope: asset\n      asset_ids:\n        - asset.cap_normal\n        - asset.cap_gold\n        - asset.bad_bomb\n    feedback:\n      visual: Item pops with a golden star burst, art-text score popup rises above the ring, HUD score\n        bumps\n      audio_asset_id: audio.catch_hat\n  - kind: gameplay_action\n    trigger: A bad bomb touches the forehead ring and on every item that falls past the bottom edge uncaught\n    response: Add one miss, shake the camera, flash the screen red and update the miss icons; reaching\n      10 total misses or 5 consecutive misses ends the round immediately.\n    state_change: PLAYING -> RESULT when the miss limit is hit\n    target:\n      scope: screen_element\n      screen_element_ids:\n        - el.miss_flash\n    feedback:\n      visual: Red translucent screen flash plus a short camera shake and a shrinking miss icon\n      audio_asset_id: audio.explode\n  - kind: screen_transition\n    trigger: 45 second timer expires\n    response: Hide GameplayScreen, show ResultScreen with the final score, rank title, share copy and\n      duet copy.\n    state_change: PLAYING -> RESULT\n    feedback:\n      visual: Result card scales in with a soft glow while remaining camera feed stays visible\n      audio_asset_id: audio.result\n  - kind: retry\n    trigger: Tap the RetryButton\n    response: Reset score, misses, consecutive misses and timer, clear the item pool and return to the\n      calibration screen.\n    state_change: RESULT -> CALIBRATION\n    feedback:\n      visual: Retry button punch-scale and the result card slides out\n      audio_asset_id: audio.countdown_tick\nassets:\n  - id: asset.cap_normal\n    role: normal santa cap\n    description: Cartoon red santa hat with white fur trim and a pompom, glossy storybook style,\n      centered on transparent background, ready to fall down the screen.\n    is_background: false\n    count: 3\n    animated: false\n    kind: visual\n    interactive_role: spawnable_pool\n  - id: asset.cap_gold\n    role: golden cap gift\n    description: Golden santa cap with sparkles and a small gift box ribbon, shiny metallic highlights,\n      bonus item worth three points, centered on transparent background.\n    is_background: false\n    count: 1\n    animated: false\n    kind: visual\n    interactive_role: spawnable_pool\n  - id: asset.bad_bomb\n    role: green bad monster bomb\n    description: Grumpy green monster holding a round black bomb with a lit fuse, clearly readable as a\n      bad item, centered on transparent background for the falling item stream.\n    is_background: false\n    count: 1\n    animated: false\n    kind: visual\n    interactive_role: spawnable_pool\n  - id: asset.forehead_ring\n    role: forehead catcher ring\n    description: Soft golden ring with a glowing inner gradient and a small star marker at the center,\n      no hard edges, sized to read as a catch hit area over the camera feed.\n    is_background: false\n    count: 1\n    animated: false\n    kind: visual\n    interactive_role: addressable_part\n  - id: asset.snowflake\n    role: snowflake sprite\n    description: Single soft white six-point snowflake with gentle blur, semi-transparent, used many\n      times at different sizes for drifting snow over the camera feed.\n    is_background: false\n    count: 4\n    animated: false\n    kind: visual\n    interactive_role: decoration\n  - id: asset.star_burst\n    role: golden star burst\n    description: Radial golden star burst with sharp four-point sparkles and a warm glow, transparent\n      background, played once when a hat is caught for hit feedback.\n    is_background: false\n    count: 2\n    animated: false\n    kind: visual\n    interactive_role: decoration\n  - id: asset.hud_plate\n    role: hud pill plate\n    description: Rounded dark red translucent pill plate with a thin gold border and subtle candy\n      stripe, used behind the score and miss icons so text stays readable over the feed.\n    is_background: false\n    count: 2\n    animated: false\n    coverage: partial\n    kind: visual\n    interactive_role: decoration\n  - id: asset.miss_icon\n    role: miss icon\n    description: Small hollow gold star outline that fills with dull grey when a miss is used, matching\n      the cute festive HUD style, used five times in the miss icon row.\n    is_background: false\n    count: 5\n    animated: false\n    kind: visual\n    interactive_role: addressable_part\n  - id: asset.result_card\n    role: result card panel\n    description: Translucent deep red rounded card with gold snowflake border and soft inner vignette,\n      sized to cover the middle of the screen without hiding the whole camera feed.\n    is_background: false\n    count: 1\n    animated: false\n    coverage: partial\n    kind: visual\n    interactive_role: decoration\n  - id: asset.retry_button\n    role: retry button plate\n    description: Rounded bright red button plate with a gold rim and glossy highlight, sized for a two\n      hundred forty by eighty retry button at the bottom of the result card.\n    is_background: false\n    count: 1\n    animated: false\n    kind: visual\n    interactive_role: addressable_part\n  - id: asset.countdown_art\n    role: countdown and banner art text\n    description: Curated decorative art text with heavy gradient fill and outline, reused for the\n      3-2-1-GO countdown, the START banner and the score popup moment.\n    is_background: false\n    count: 1\n    animated: false\n    kind: art_text\n  - id: asset.title_art\n    role: result title art text\n    description: Curated arcade style art text with lit outline and glow, reused for the title on the\n      calibration screen and the TIME UP banner on the result screen.\n    is_background: false\n    count: 1\n    animated: false\n    kind: art_text\n  - id: audio.bgm\n    role: festive background music\n    description: Upbeat original chiptune holiday loop with sleigh bells and bells melody, about thirty\n      seconds, looped for the whole session.\n    is_background: false\n    count: 1\n    animated: false\n    kind: audio\n  - id: audio.countdown_tick\n    role: countdown tick and button click\n    description: Short bright bell tick used once per countdown number and reused as the retry button\n      click sound.\n    is_background: false\n    count: 1\n    animated: false\n    kind: audio\n  - id: audio.catch_hat\n    role: hat catch sound\n    description: Crisp pop and jingle chime played whenever a normal or golden hat lands inside the\n      forehead ring.\n    is_background: false\n    count: 1\n    animated: false\n    kind: audio\n  - id: audio.explode\n    role: bomb explosion and miss sound\n    description: Short muffled explosion with a descending buzz played on a bad bomb catch and on any\n      uncaught item falling off screen.\n    is_background: false\n    count: 1\n    animated: false\n    kind: audio\n  - id: audio.result\n    role: result fanfare\n    description: Two second festive fanfare with bells and a rising chord played when the result card\n      reveals the final score and rank.\n    is_background: false\n    count: 1\n    animated: false\n    kind: audio\nrandom_behaviors:\n  - what: which item type spawns\n    range: 65 percent normal cap, 15 percent golden gift, 20 percent bad bomb\n    verify_strategy: Force spawn 20 items in preview and log the type counts, confirm the split is\n      within 15 percent of the target weights.\n  - what: spawn horizontal position\n    range: uniform random x between -280 and 260 in screen space\n    verify_strategy: Capture three gameplay screenshots and confirm every spawned item starts within the\n      horizontal safe bounds.\n  - what: fall speed after each five correct catches\n    range: plus 10 percent of the base speed per five catches, capped at 1.8 times base\n    verify_strategy: Log the speed multiplier after every fifth catch and confirm it ramps 1.0 to 1.1 to\n      1.2 and stops at 1.8.\ncamera_feed_constraints:\n  tracking_type: head\n  tracking_range: full screen; the face stays visible in the center band while HUD elements hug the\n    top and bottom safe-zone edges\n  user_image_visible: true\n  composition: none\nmechanic:\n  class: other\n  description: \"Head-tracked catching game: pooled hats, golden gifts and bad bombs fall from the top\n    of the screen and the user catches the good ones with a forehead ring projected from the head\n    tracker. Weighted item mix, speed ramp every five catches, and loss on ten total misses or five\n    consecutive misses.\"\n  parameters:\n    base_fall_speed_px_per_sec: 300\n    spawn_interval_sec: 0.85\n    speed_multiplier_per_5_correct: 0.1\n    max_speed_multiplier: 1.8\n    score_normal: 1\n    score_gold: 3\n    score_bad: -2\n    gold_speed_boost: 0.3\n    catch_radius_px: 92\n    max_misses: 10\n    max_consecutive_misses: 5\n    calibration_hold_sec: 0.6\n    pool_size: 9\n    hit_test: screen_distance_to_projected_forehead\ncriteria:\n  - category: layout\n    check: Score counter sits top-left, five miss icons top-right and the timer bar above them, all\n      inside the safe zone.\n  - category: layout\n    check: No opaque full-screen panel covers the camera feed on any of the three screens; the result\n      card is translucent.\n  - category: state\n    check: RecordStart resets score, misses, timer and item pool and returns to the calibration screen.\n  - category: state\n    check: Holding the head on the red line for 0.6 seconds starts the 3-2-1-GO countdown and then\n      playing.\n  - category: state\n    check: Ten total misses or five consecutive misses ends the round immediately with the result screen.\n  - category: state\n    check: The retry button returns to calibration with a fully reset game state.\n  - category: value\n    check: Normal hat is plus one, golden gift is plus three with a thirty percent speed boost, bad bomb\n      is minus two and counts one miss.\n  - category: value\n    check: Each five correct catches raises the global fall speed by ten percent up to one point eight\n      times the base speed.\n  - category: boundary\n    check: The round always ends at forty five seconds even if no miss limit is reached.\n  - category: boundary\n    check: Score never drops below zero and the miss icon row never shows fewer than zero icons.\n  - category: random\n    check: Spawned item types follow the sixty five fifteen twenty weighting over a sample of twenty\n      spawns.\n  - category: camera_feed\n    check: The camera feed stays visible and the foreground never hides the whole face region.\n  - category: visual\n    check: A catch produces a golden star burst and a rising art-text score popup, a miss flashes red\n      with a screen shake.\nmechanic_refs:\n  - mechanic_id: chef_hat_catch\n    borrowed_elements:\n      - falling item stream from the top of the screen\n      - head-tracked catch position for the player\n      - score counter in the top-left HUD\n      - small festive sticker framing near the user's head\n  - mechanic_id: collecting_dodge\n    borrowed_elements:\n      - miss and life icons row under the score\n      - pooled falling item prefabs recycled after each catch\n      - three screen flow with a result screen and retry button\nplan_type: game\n",
+    "template": {
+      "status": "none",
+      "rationale": "The closest strong buildable, chef_hat_catch, steers a pot by dragging and ends on a timer only. This design is head-tracked with a forehead collider, weighted item mix, consecutive-miss and cumulative-miss loss, and a speed ramp, so the scaffold's drag input would have to be ripped out. Built from scratch while borrowing its falling-item stream and HUD framing.",
+      "updatedAt": "2026-10-21T23:58:23.874Z"
+    },
+    "updatedAt": "2026-10-21T23:58:23.874Z"
+  },
+  "uiOwnership": {},
+  "uiOwnershipBaseline": {
+    "takenAt": "2026-10-21T23:55:03.432Z",
+    "count": 0
+  }
+}

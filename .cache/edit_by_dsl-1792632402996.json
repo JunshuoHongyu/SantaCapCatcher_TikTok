@@ -1,0 +1,8 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"executed\":1,\"results\":[{\"command\":\"delete_object\",\"status\":\"success\",\"result\":{\"guid\":\"s47\",\"name\":\"Snow0\",\"enabled\":true,\"visible\":true,\"components\":[{\"guid\":\"c91\",\"type\":\"ScreenTransform\",\"anchoredPosition\":{\"x\":0,\"y\":0},\"sizeDelta\":{\"x\":720,\"y\":1280}},{\"guid\":\"c92\",\"type\":\"Image\"}]}}]}"
+    }
+  ]
+}

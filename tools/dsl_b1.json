@@ -1,0 +1,38 @@
+{
+ "intention": "Build the Santa Cap Catcher game scene (b1)",
+ "commands": [
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Empty Object",
+    "name": "GameManager"
+   },
+   "alias": "gm"
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Head Tracker",
+    "name": "HeadTracker"
+   },
+   "alias": "ht"
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "2D Scene Object",
+    "name": "GameRoot"
+   },
+   "alias": "root"
+  },
+  {
+   "commandType": "move_object",
+   "params": {
+    "guid": {
+     "$ref": "gm"
+    },
+    "position": "back"
+   }
+  }
+ ]
+}

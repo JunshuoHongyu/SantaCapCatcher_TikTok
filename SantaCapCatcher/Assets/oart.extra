@@ -1,0 +1,19 @@
+[
+  {
+    "guid": {
+      "a": "d875478d-8e46-3a46-cbe2-0f658a786efa",
+      "b": ""
+    },
+    "extraType": "ResItemFolder",
+    "name": "oart",
+    "version": "0.1.0",
+    "authorizationInfo": "",
+    "extendedInfo": {
+      "isVisibleInInspector": true,
+      "hideInPanel": false,
+      "expandInPanel": true
+    },
+    "objGuid": "",
+    "references": []
+  }
+]

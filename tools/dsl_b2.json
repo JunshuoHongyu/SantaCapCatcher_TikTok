@@ -1,0 +1,1216 @@
+{
+ "intention": "Build the Santa Cap Catcher game scene (b2)",
+ "commands": [
+  {
+   "commandType": "log",
+   "params": {
+    "message": "building snow",
+    "level": "info"
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Screen Image",
+    "name": "Snow0",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "Snow0"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Snow0",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": -240,
+      "y": 300
+     },
+     "sizeDelta": {
+      "x": 44,
+      "y": 44
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Snow0",
+     "componentType": "Image"
+    },
+    "properties": {
+     "texture": {
+      "guid": "r6"
+     },
+     "stretchMode": "Fit",
+     "opacity": 0.7
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Screen Image",
+    "name": "Snow1",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "Snow1"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Snow1",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 180,
+      "y": 460
+     },
+     "sizeDelta": {
+      "x": 32,
+      "y": 32
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Snow1",
+     "componentType": "Image"
+    },
+    "properties": {
+     "texture": {
+      "guid": "r6"
+     },
+     "stretchMode": "Fit",
+     "opacity": 0.55
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Screen Image",
+    "name": "Snow2",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "Snow2"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Snow2",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 260,
+      "y": 90
+     },
+     "sizeDelta": {
+      "x": 26,
+      "y": 26
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Snow2",
+     "componentType": "Image"
+    },
+    "properties": {
+     "texture": {
+      "guid": "r6"
+     },
+     "stretchMode": "Fit",
+     "opacity": 0.5
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Screen Image",
+    "name": "Snow3",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "Snow3"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Snow3",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": -150,
+      "y": 520
+     },
+     "sizeDelta": {
+      "x": 22,
+      "y": 22
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Snow3",
+     "componentType": "Image"
+    },
+    "properties": {
+     "texture": {
+      "guid": "r6"
+     },
+     "stretchMode": "Fit",
+     "opacity": 0.45
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Screen Image",
+    "name": "CalibDim",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "CalibDim"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "CalibDim",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": 0
+     },
+     "sizeDelta": {
+      "x": 720,
+      "y": 1280
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "CalibDim",
+     "componentType": "Image"
+    },
+    "properties": {
+     "texture": {
+      "guid": "r12"
+     },
+     "stretchMode": "Fit",
+     "color": {
+      "r": 0.02,
+      "g": 0.02,
+      "b": 0.06,
+      "a": 0.62
+     },
+     "opacity": 1
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Screen Image",
+    "name": "CalibRing",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "CalibRing"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "CalibRing",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": 120
+     },
+     "sizeDelta": {
+      "x": 320,
+      "y": 320
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "CalibRing",
+     "componentType": "Image"
+    },
+    "properties": {
+     "texture": {
+      "guid": "r5"
+     },
+     "stretchMode": "Fit",
+     "opacity": 0.95
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "2D Text",
+    "name": "CalibTitle",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "CalibTitle"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "CalibTitle",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": -140
+     },
+     "sizeDelta": {
+      "x": 660,
+      "y": 100
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "CalibTitle",
+     "componentType": "Text"
+    },
+    "properties": {
+     "text": "把脸对准金圈",
+     "fontSize": 56,
+     "color": {
+      "r": 1,
+      "g": 1,
+      "b": 1,
+      "a": 1
+     },
+     "horizontalAlignment": "CENTER",
+     "verticalAlignment": "CENTER"
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "2D Text",
+    "name": "CalibSub",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "CalibSub"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "CalibSub",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": -230
+     },
+     "sizeDelta": {
+      "x": 660,
+      "y": 70
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "CalibSub",
+     "componentType": "Text"
+    },
+    "properties": {
+     "text": "头在圈内 · 帽子会从天上掉下来",
+     "fontSize": 30,
+     "color": {
+      "r": 1,
+      "g": 0.88,
+      "b": 0.6,
+      "a": 1
+     },
+     "horizontalAlignment": "CENTER",
+     "verticalAlignment": "CENTER"
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Screen Image",
+    "name": "CalibBtn",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "CalibBtn"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "CalibBtn",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": -400
+     },
+     "sizeDelta": {
+      "x": 320,
+      "y": 110
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "CalibBtn",
+     "componentType": "Image"
+    },
+    "properties": {
+     "texture": {
+      "guid": "r10"
+     },
+     "stretchMode": "Fit",
+     "opacity": 1
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "2D Text",
+    "name": "CalibBtnText",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "CalibBtnText"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "CalibBtnText",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": -400
+     },
+     "sizeDelta": {
+      "x": 320,
+      "y": 110
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "CalibBtnText",
+     "componentType": "Text"
+    },
+    "properties": {
+     "text": "开始挑战",
+     "fontSize": 44,
+     "color": {
+      "r": 1,
+      "g": 1,
+      "b": 1,
+      "a": 1
+     },
+     "horizontalAlignment": "CENTER",
+     "verticalAlignment": "CENTER"
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Screen Image",
+    "name": "PlayRing",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "PlayRing"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "PlayRing",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": 120
+     },
+     "sizeDelta": {
+      "x": 250,
+      "y": 250
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "PlayRing",
+     "componentType": "Image"
+    },
+    "properties": {
+     "texture": {
+      "guid": "r5"
+     },
+     "stretchMode": "Fit",
+     "opacity": 0.95
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Screen Image",
+    "name": "Item0",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "Item0"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Item0",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": 600
+     },
+     "sizeDelta": {
+      "x": 150,
+      "y": 150
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Item0",
+     "componentType": "Image"
+    },
+    "properties": {
+     "texture": {
+      "guid": "r2"
+     },
+     "stretchMode": "Fit",
+     "opacity": 1
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Screen Image",
+    "name": "Item1",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "Item1"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Item1",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": 600
+     },
+     "sizeDelta": {
+      "x": 150,
+      "y": 150
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Item1",
+     "componentType": "Image"
+    },
+    "properties": {
+     "texture": {
+      "guid": "r2"
+     },
+     "stretchMode": "Fit",
+     "opacity": 1
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Screen Image",
+    "name": "Item2",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "Item2"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Item2",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": 600
+     },
+     "sizeDelta": {
+      "x": 150,
+      "y": 150
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Item2",
+     "componentType": "Image"
+    },
+    "properties": {
+     "texture": {
+      "guid": "r2"
+     },
+     "stretchMode": "Fit",
+     "opacity": 1
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Screen Image",
+    "name": "Item3",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "Item3"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Item3",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": 600
+     },
+     "sizeDelta": {
+      "x": 150,
+      "y": 150
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Item3",
+     "componentType": "Image"
+    },
+    "properties": {
+     "texture": {
+      "guid": "r2"
+     },
+     "stretchMode": "Fit",
+     "opacity": 1
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Screen Image",
+    "name": "Item4",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "Item4"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Item4",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": 600
+     },
+     "sizeDelta": {
+      "x": 150,
+      "y": 150
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Item4",
+     "componentType": "Image"
+    },
+    "properties": {
+     "texture": {
+      "guid": "r3"
+     },
+     "stretchMode": "Fit",
+     "opacity": 1
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Screen Image",
+    "name": "Item5",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "Item5"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Item5",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": 600
+     },
+     "sizeDelta": {
+      "x": 150,
+      "y": 150
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Item5",
+     "componentType": "Image"
+    },
+    "properties": {
+     "texture": {
+      "guid": "r4"
+     },
+     "stretchMode": "Fit",
+     "opacity": 1
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Screen Image",
+    "name": "Burst",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "Burst"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Burst",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": 200
+     },
+     "sizeDelta": {
+      "x": 340,
+      "y": 340
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Burst",
+     "componentType": "Image"
+    },
+    "properties": {
+     "texture": {
+      "guid": "r7"
+     },
+     "stretchMode": "Fit",
+     "opacity": 0
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Screen Image",
+    "name": "HudPlate",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "HudPlate"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "HudPlate",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": 440
+     },
+     "sizeDelta": {
+      "x": 660,
+      "y": 216
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "HudPlate",
+     "componentType": "Image"
+    },
+    "properties": {
+     "texture": {
+      "guid": "r8"
+     },
+     "stretchMode": "Fit",
+     "opacity": 1
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "2D Text",
+    "name": "HudScore",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "HudScore"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "HudScore",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": -110,
+      "y": 470
+     },
+     "sizeDelta": {
+      "x": 320,
+      "y": 70
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "HudScore",
+     "componentType": "Text"
+    },
+    "properties": {
+     "text": "得分 0",
+     "fontSize": 46,
+     "color": {
+      "r": 1,
+      "g": 0.82,
+      "b": 0.25,
+      "a": 1
+     },
+     "horizontalAlignment": "CENTER",
+     "verticalAlignment": "CENTER"
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "2D Text",
+    "name": "HudLife",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "HudLife"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "HudLife",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 140,
+      "y": 470
+     },
+     "sizeDelta": {
+      "x": 340,
+      "y": 70
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "HudLife",
+     "componentType": "Text"
+    },
+    "properties": {
+     "text": "未接 0/10",
+     "fontSize": 32,
+     "color": {
+      "r": 1,
+      "g": 1,
+      "b": 1,
+      "a": 1
+     },
+     "horizontalAlignment": "CENTER",
+     "verticalAlignment": "CENTER"
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Screen Image",
+    "name": "BarBg",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "BarBg"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "BarBg",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": 400
+     },
+     "sizeDelta": {
+      "x": 560,
+      "y": 20
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "BarBg",
+     "componentType": "Image"
+    },
+    "properties": {
+     "texture": {
+      "guid": "r12"
+     },
+     "stretchMode": "Fit",
+     "color": {
+      "r": 0.15,
+      "g": 0.06,
+      "b": 0.06,
+      "a": 0.9
+     },
+     "opacity": 1
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Screen Image",
+    "name": "BarFill",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "BarFill"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "BarFill",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": 400
+     },
+     "sizeDelta": {
+      "x": 560,
+      "y": 20
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "BarFill",
+     "componentType": "Image"
+    },
+    "properties": {
+     "texture": {
+      "guid": "r12"
+     },
+     "stretchMode": "Fit",
+     "color": {
+      "r": 0.49,
+      "g": 0.86,
+      "b": 0.42,
+      "a": 1
+     },
+     "opacity": 1
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "2D Text",
+    "name": "CountText",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "CountText"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "CountText",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": 60
+     },
+     "sizeDelta": {
+      "x": 400,
+      "y": 300
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "CountText",
+     "componentType": "Text"
+    },
+    "properties": {
+     "text": "",
+     "fontSize": 190,
+     "color": {
+      "r": 1,
+      "g": 0.82,
+      "b": 0.25,
+      "a": 1
+     },
+     "horizontalAlignment": "CENTER",
+     "verticalAlignment": "CENTER"
+    }
+   }
+  },
+  {
+   "commandType": "add_builtin_object",
+   "params": {
+    "object_type": "Screen Image",
+    "name": "Flash",
+    "parent": {
+     "$ref": "s7"
+    }
+   },
+   "alias": "Flash"
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Flash",
+     "componentType": "ScreenTransform"
+    },
+    "properties": {
+     "anchoredPosition": {
+      "x": 0,
+      "y": 0
+     },
+     "sizeDelta": {
+      "x": 720,
+      "y": 1280
+     }
+    }
+   }
+  },
+  {
+   "commandType": "set_component",
+   "params": {
+    "guid": {
+     "$ref": "Flash",
+     "componentType": "Image"
+    },
+    "properties": {
+     "texture": {
+      "guid": "r12"
+     },
+     "stretchMode": "Fit",
+     "color": {
+      "r": 1,
+      "g": 0.1,
+      "b": 0.1,
+      "a": 0
+     },
+     "opacity": 1
+    }
+   }
+  }
+ ]
+}

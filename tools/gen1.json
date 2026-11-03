@@ -1,0 +1,30 @@
+[
+  {
+    "name": "CapRed",
+    "asset_type": "sticker",
+    "style": "2D Cartoon",
+    "aspect_ratio": "1:1",
+    "prompt": "A single cheerful Christmas santa hat, bright red felt with fluffy white fur trim and a white pompom on the tip, glossy cartoon storybook style, thick dark outline, soft golden rim light, tilted slightly to the right, isolated on a transparent background, centered, no text"
+  },
+  {
+    "name": "CapGold",
+    "asset_type": "sticker",
+    "style": "2D Cartoon",
+    "aspect_ratio": "1:1",
+    "prompt": "A single luxurious golden Christmas santa hat made of shiny gold cloth with sparkles and a small red gift box with a gold ribbon beside it, glowing metallic highlights, cartoon game bonus item, thick dark outline, isolated on a transparent background, centered, no text"
+  },
+  {
+    "name": "BadBomb",
+    "asset_type": "sticker",
+    "style": "2D Cartoon",
+    "aspect_ratio": "1:1",
+    "prompt": "A grumpy green cartoon monster head with a sneaky grin holding a round black bomb with a lit sparkling fuse, clearly a bad item, bright green skin, cartoon game enemy, thick dark outline, isolated on a transparent background, centered, no text"
+  },
+  {
+    "name": "ForeheadRing",
+    "asset_type": "sticker",
+    "style": "General",
+    "aspect_ratio": "1:1",
+    "prompt": "A soft glowing golden ring with a warm gradient inner glow and four small sparkle accents around it, semi transparent edges, magical targeting reticle for a casual game, isolated on a transparent background, perfectly centered, no text"
+  }
+]

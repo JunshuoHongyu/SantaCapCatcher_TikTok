@@ -1,0 +1,6 @@
+{
+  "intention": "Check that preview screenshots work without the reload-ack path that hung earlier.",
+  "commands": [
+    { "commandType": "screenshot", "params": {} }
+  ]
+}

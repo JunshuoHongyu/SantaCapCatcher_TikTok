@@ -1,0 +1,8 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "# Game Assets matching \"audio sound effect bell ding explosion cheer countdown game over christmas\"\n\nUse `import_source(path)` to import any asset into your scene.\n\n- **Click** (MP3): Short UI click sound — for button taps and menu interactions\n  - path: `sounds/sfx_click.mp3`\n  - tags: click, tap, button, ui, sfx, game, audio\n  - license: CC0\n- **Fail** (MP3): Negative error tone — for wrong answers, game over, or failure events\n  - path: `sounds/sfx_fail.mp3`\n  - tags: fail, error, wrong, lose, negative, sfx, game, audio\n  - license: CC0\n- **Pop** (MP3): Bubbly pop/pluck sound — for item collection, bubble burst, or playful interactions\n  - path: `sounds/sfx_pop.mp3`\n  - tags: pop, bubble, pluck, collect, sfx, game, audio\n  - license: CC0\n- **Success** (MP3): Positive confirmation tone — for correct answers, level complete, or success events\n  - path: `sounds/sfx_success.mp3`\n  - tags: success, win, correct, confirm, positive, sfx, game, audio\n  - license: CC0\n- **Confirm Button (Normal)** (PNG): Confirm rounded rectangle button — normal state, transparent background\n  - path: `ui/buttons/btn_green_normal.png`\n  - tags: button, green, normal, ui, game\n  - license: CC0\n\n\n> **Need more?** These are local pre-made assets. For higher-quality stickers, 3D characters, and accessories, use `search_library(query=\"...\", category=\"sticker|character|accessory|game_module\")` to search the Effect House cloud library — cloud assets look **much better** than default primitives. When results are found, **import them** with `import_from_library(asset_id=...)` inside `edit_by_dsl`."
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"hasActiveProject\": true,\n  \"path\": \"E:\\\\HatGame\\\\SantaCapCatcher\",\n  \"isSaved\": true,\n  \"isChanged\": false,\n  \"projectID\": \"80610b50-1a39-f54c-f557-074e30ca9760\",\n  \"handoff\": {\n    \"autoBrief\": {\n      \"summary\": \"Auto-baseline at save: 1 object(s) in 1 render group(s).\",\n      \"updatedAt\": \"2026-10-21T23:54:46.980Z\"\n    }\n  },\n  \"externalEditsSinceOpen\": 0,\n  \"graphChangedOnDisk\": true,\n  \"externalChangeHint\": \"The project changed outside your edits since it was opened. Call get_changes() for the list, then re-read affected state (get_scene / native script reads / describe_project) before editing.\"\n}"
+    }
+  ]
+}

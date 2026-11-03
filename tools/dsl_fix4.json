@@ -1,0 +1,10 @@
+{
+  "intention": "Shift and narrow the HUD plate and timer bar so the whole top readout stays inside the TikTok safe zone (x from -340 to +260).",
+  "commands": [
+    { "commandType": "set_component", "params": { "guid": { "$ref": "s27", "componentType": "ScreenTransform" }, "properties": { "anchoredPosition": { "x": -20, "y": 440 }, "sizeDelta": { "x": 560, "y": 210 } } } },
+    { "commandType": "set_component", "params": { "guid": { "$ref": "s28", "componentType": "ScreenTransform" }, "properties": { "anchoredPosition": { "x": -160, "y": 470 }, "sizeDelta": { "x": 260, "y": 70 } } } },
+    { "commandType": "set_component", "params": { "guid": { "$ref": "s29", "componentType": "ScreenTransform" }, "properties": { "anchoredPosition": { "x": 55, "y": 470 }, "sizeDelta": { "x": 300, "y": 70 } } } },
+    { "commandType": "set_component", "params": { "guid": { "$ref": "s30", "componentType": "ScreenTransform" }, "properties": { "anchoredPosition": { "x": -20, "y": 400 }, "sizeDelta": { "x": 560, "y": 20 } } } },
+    { "commandType": "set_component", "params": { "guid": { "$ref": "s31", "componentType": "ScreenTransform" }, "properties": { "anchoredPosition": { "x": -20, "y": 400 }, "sizeDelta": { "x": 560, "y": 20 } } } }
+  ]
+}

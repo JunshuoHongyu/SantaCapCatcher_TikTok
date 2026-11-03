@@ -1,0 +1,19 @@
+[
+  {
+    "guid": {
+      "a": "d782a526-629b-b1ac-1a20-bf28848501c8",
+      "b": ""
+    },
+    "extraType": "ResItemFolder",
+    "name": "vi_arcade.oart",
+    "version": "0.1.0",
+    "authorizationInfo": "",
+    "extendedInfo": {
+      "isVisibleInInspector": true,
+      "hideInPanel": false,
+      "expandInPanel": false
+    },
+    "objGuid": "",
+    "references": []
+  }
+]

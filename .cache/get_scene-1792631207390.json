@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Error: Main scene not found while calling GetScene command."
+    }
+  ],
+  "isError": true
+}

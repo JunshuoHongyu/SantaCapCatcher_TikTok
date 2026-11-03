@@ -1,0 +1,9 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"error\": \"get_scene_view failed: Scene panel element (#id-sceneview-panel) not found.\"\n}"
+    }
+  ],
+  "isError": true
+}

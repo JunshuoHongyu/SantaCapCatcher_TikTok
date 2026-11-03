@@ -1,0 +1,5 @@
+{
+  "category": "skill",
+  "query": "UIPatterns ScreenTransform buttons panels HUD art text audio component particle",
+  "intention": "定位 UI、屏幕变换、音频与粒子相关的实现规范"
+}

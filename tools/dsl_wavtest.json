@@ -1,0 +1,6 @@
+{
+  "intention": "Test which WAV variant the audio importer accepts before wiring sounds.",
+  "commands": [
+    { "commandType": "import_source", "params": { "file_path": "E:/HatGame/art/Boom48.wav" }, "alias": "boom48" }
+  ]
+}
