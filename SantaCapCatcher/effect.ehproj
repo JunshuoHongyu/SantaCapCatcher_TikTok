@@ -1,6 +1,6 @@
 {
   "name": "",
-  "lastModified": "Mon, 02 Nov 2026 23:58:37 GMT",
+  "lastModified": "Tue, 03 Nov 2026 23:03:14 GMT",
   "version": "5.15.0",
   "renderNames": {
     "0": "Default Layer",
@@ -68,9 +68,9 @@
     "62": "Layer 62",
     "63": "Layer 63"
   },
-  "durationToCreate": 1037061245,
-  "durationCreation": 1503586,
-  "durationBackground": 24961,
+  "durationToCreate": 1120138736,
+  "durationCreation": 2071322,
+  "durationBackground": 165597,
   "effectHint": "",
   "templateID": "templateID_none",
   "overwriteBuiltinGAN": 1,
@@ -104,22 +104,22 @@
   ],
   "lastSceneView": 1,
   "fromNewUserGuide": false,
-  "effectSize": 2334747,
+  "effectSize": 2334808,
   "effectPackagePath": "C:\\Users\\ywx1551497\\AppData\\Roaming\\EffectHouse\\Instances\\Instance1\\Submit\\package\\effect.zip",
   "exportPerformance": {
-    "zipDuration": 813,
+    "zipDuration": 785,
     "effectPackageDumpDuration": 0,
-    "beforeExportDuration": 437,
-    "beforeExportingAmazingSceneDuration": 49,
-    "onExportDuration": 583,
-    "onExportSaveAssetsDuration": 156,
+    "beforeExportDuration": 116,
+    "beforeExportingAmazingSceneDuration": 26,
+    "onExportDuration": 333,
+    "onExportSaveAssetsDuration": 119,
     "afterExportDuration": 2,
-    "ioDuration": 3,
+    "ioDuration": 2,
     "vfxReplaceGuidDuration": 0,
-    "writeConfigFilesDuration": 245
+    "writeConfigFilesDuration": 172
   },
   "effectUploadResult": {
-    "uri": "/obj/tiktok-effect-public-us/effects/effect/rKb4jcwccTXfUUkCSNdzMX_fcca54da4333bac9000781e6366fa8ac",
-    "url": "https://lf16-effect.tiktokcdn.com//obj/tiktok-effect-public-us/effects/effect/rKb4jcwccTXfUUkCSNdzMX_fcca54da4333bac9000781e6366fa8ac"
+    "uri": "/obj/tiktok-effect-public-us/effects/effect/uz6NZepf9BX8DNXoCPnG9R_ee865bf233a8b0306e4469042666bee6",
+    "url": "https://lf16-effect.tiktokcdn.com//obj/tiktok-effect-public-us/effects/effect/uz6NZepf9BX8DNXoCPnG9R_ee865bf233a8b0306e4469042666bee6"
   }
 }
